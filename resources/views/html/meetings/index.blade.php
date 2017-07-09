@@ -2,7 +2,7 @@
 @section('style')
     <style>
         .card {
-            height: 95.8vh;
+        / / height: 95.8 vh;
         }
     </style>
 @stop
@@ -44,7 +44,27 @@
 @endsection
 
 @section('script')
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
     <script>
+        let socket = io('127.0.0.1:3000');
+        $(function () {
+            // var socket = io('127.0.0.1:3000');
+            // var socket = io('192.241.170.241:3000'); // Server or Domain IP Address // For HTTP
+            // let socket = io.connect('https://cambodianmatch.com:45621', {secure: true}); // For HTTPS
+            // Message Notification real Time
+            socket.on('alert-channel:alert', function (message) {
+                let meeting_data = message.meeting_data;
+                console.log(message);
+                let html = '<tr><th>' + meeting_data.id + '</th>'
+                    + '<th>' + meeting_data.date + '</th>'
+                    + '<th>' + meeting_data.time + '</th>'
+                    + '<th>' + meeting_data.subject + '</th>'
+                    + '<th>' + meeting_data.related_org + '</th>'
+                    + '<th>' + meeting_data.location + '</th></tr>';
+                $('table.bordered').append(html);
+            });
+        });
+
         $(".delete").click(function () {
             let id = $(this).val();
             let $con = confirm('Are you sure to delete this image');

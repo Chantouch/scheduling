@@ -6,6 +6,7 @@ use App\Model\Meeting;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Vinkla\Hashids\HashidsManager;
 
@@ -70,7 +71,14 @@ class MeetingController extends Controller
                 return response()->json('Can not add new record');
             }
             DB::commit();
-            return redirect()->route('meetings.index')->with('success', 'Meeting added successfully');
+            $dataRedis = [
+                'event' =>  'alert',
+                'data'  => [
+                    'meeting_data'=>  $meeting,
+                ]
+            ];
+            Redis::publish('alert-channel', json_encode($dataRedis));
+            return redirect()->route('app.meetings.index')->with('success', 'Meeting added successfully');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add new record');
