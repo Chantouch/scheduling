@@ -1,5 +1,7 @@
 @extends('layouts.layout')
-
+@section('style')
+    <link rel="stylesheet" href="{!! asset('assets/plugins/sweetalert/sweetalert.css') !!}">
+@stop
 @section('content')
     <div class="col s12 m12 l12">
         <div class="card">
@@ -10,7 +12,8 @@
                     </div>
                     <div class="col s6 l6">
                         <div class="right m-t-lg">
-                            <a href="{!! route('app.meetings.create') !!}" class="waves-effect waves-blue btn-flat">Add more</a>
+                            <a href="{!! route('app.meetings.create') !!}" class="waves-effect waves-blue btn-flat">Add
+                                more</a>
                         </div>
                     </div>
                 </div>
@@ -21,8 +24,9 @@
 @endsection
 
 @section('script')
+    <script src="{!! asset('assets/plugins/sweetalert/sweetalert.min.js') !!}"></script>
     <script>
-        $(".delete").click(function () {
+        $(".deleted").click(function () {
             let id = $(this).val();
             let $con = confirm('Are you sure to delete this image');
             if ($con) {
@@ -37,6 +41,37 @@
                 $(this).closest("tr").fadeOut(800);
                 //$(this).closest("tr").remove();
             }
+        });
+
+        $(document).on('click', '.delete', function (e) {
+            e.preventDefault();
+            let id = $(this).val();
+            let route = '/app/meetings/' + id;
+            let token = {'X-CSRF-TOKEN': $("[name='_token']:first").val()};
+            swal({
+                title: "Window Meeting Deletion",
+                text: "Are you absolutely sure you want to delete ? This action cannot be undone." +
+                "This will permanently delete, and remove all collections and materials associations.",
+                type: "warning",
+                showCancelButton: true,
+                closeOnConfirm: false,
+                confirmButtonText: "Delete",
+                confirmButtonColor: "#ec6c62"
+            }, function () {
+                $.ajax({
+                    type: "DELETE",
+                    url: route,
+                    headers: token
+                }).done(function (data) {
+                    swal("Window Meeting Deleted!", data, "success");
+                    //$(this).closest("tr").fadeOut(800);
+                    setTimeout(function () {
+                        window.location.reload();
+                    }, 1500);
+                }).error(function (data) {
+                    swal("Oops", "We couldn't connect to the server!", "error");
+                });
+            });
         });
     </script>
 @stop

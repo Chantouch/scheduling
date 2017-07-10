@@ -2,7 +2,6 @@
     <table class="bordered">
         <thead class="back_color">
         <tr class="border">
-            <th>ល.រ</th>
             <th class="size">កាលបរិច្ឆេទ</th>
             <th class="size">ម៉ោង</th>
             <th class="size">កម្មវត្ថុ</th>
@@ -11,10 +10,8 @@
         </tr>
         </thead>
         <tbody>
-        <?php $i = 1 ?>
         @foreach($meetings as $meeting)
             <tr>
-                <td>{!! $i++ !!}</td>
                 <td>{!! $meeting->date !!}</td>
                 <td>{!! $meeting->time !!}</td>
                 <td>{!! $meeting->subject !!}</td>

@@ -179,7 +179,9 @@ class MeetingController extends Controller
         return response()->json('Meeting delete successfully');
     }
 
-
+    /**
+     * @return \Illuminate\Contracts\Auth\Authenticatable|null
+     */
     public function guard()
     {
         return auth()->user();

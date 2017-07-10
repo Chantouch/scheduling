@@ -44,7 +44,7 @@
 @endsection
 
 @section('script')
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.js"></script>
+    <script src="{!! asset('js/socket.io.js') !!}"></script>
     <script>
         let socket = io('127.0.0.1:3000');
         $(function () {
@@ -55,12 +55,11 @@
             socket.on('alert-channel:alert', function (message) {
                 let meeting_data = message.meeting_data;
                 console.log(message);
-                let html = '<tr><th>' + meeting_data.id + '</th>'
-                    + '<th>' + meeting_data.date + '</th>'
-                    + '<th>' + meeting_data.time + '</th>'
-                    + '<th>' + meeting_data.subject + '</th>'
-                    + '<th>' + meeting_data.related_org + '</th>'
-                    + '<th>' + meeting_data.location + '</th></tr>';
+                let html = '<tr><td>' + meeting_data.date + '</td>'
+                    + '<td>' + meeting_data.time + '</td>'
+                    + '<td>' + meeting_data.subject + '</td>'
+                    + '<td>' + meeting_data.related_org + '</td>'
+                    + '<td>' + meeting_data.location + '</td></tr>';
                 $('table.bordered').append(html);
             });
         });

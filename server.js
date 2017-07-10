@@ -1,18 +1,27 @@
 /**
  * Created by Chantouch on 7/9/2017.
  */
-let server = require('http').Server();
+let app = require('express')();
+let server = require('http').Server(app);
 let io = require('socket.io')(server);
 server.listen(3000);
 let Redis = require('ioredis');
 let redis = new Redis();
-redis.on("error", function(err){
+redis.on("error", function (err) {
     console.log(err);
 });
 
 redis.subscribe('alert-channel');
-redis.on('message', function(channel, message){
-    //console.log("Connected");
+redis.on('message', function (channel, message) {
+    console.log('Message Received: ' + message);
     message = JSON.parse(message);
     io.emit(channel + ':' + message.event, message.data);
+});
+
+server.listen(3000, function () {
+    console.log('Listening on Port 3000');
+});
+
+server.on('disconnect', function () {
+    redis.quit();
 });
