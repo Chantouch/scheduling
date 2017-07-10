@@ -11,7 +11,15 @@ redis.on("error", function (err) {
     console.log(err);
 });
 
-redis.subscribe('alert-channel');
+redis.subscribe([
+    'create-meeting-channel',
+    'update-meeting-channel',
+    'delete-meeting-channel',
+    'create-mission-channel',
+    'update-mission-channel',
+    'delete-mission-channel',
+]);
+
 redis.on('message', function (channel, message) {
     console.log('Message Received: ' + message);
     message = JSON.parse(message);

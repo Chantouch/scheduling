@@ -11,7 +11,7 @@
         </thead>
         <tbody>
         @foreach($meetings as $meeting)
-            <tr>
+            <tr id="{!! $meeting->hashid !!}">
                 <td>{!! $meeting->date !!}</td>
                 <td>{!! $meeting->time !!}</td>
                 <td>{!! $meeting->subject !!}</td>
@@ -22,3 +22,7 @@
         </tbody>
     </table>
 @endif
+
+<div class="center">
+    <p class="heart">Touch <span>♥</span> Sek</p>
+</div>

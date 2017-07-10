@@ -14,7 +14,7 @@
         <tbody>
         <?php $i = 1 ?>
         @foreach($meetings as $meeting)
-            <tr>
+            <tr id="{!! $meeting->hashid !!}">
                 <td>{!! $i++ !!}</td>
                 <td>{!! $meeting->date !!}</td>
                 <td>{!! $meeting->time !!}</td>
@@ -25,7 +25,7 @@
                     {{--{!! Form::open(['route' => ['meetings.destroy', $meeting->hashid], 'method' => 'delete', 'class'=>'form-width-70', 'id' => 'action_form']) !!}--}}
                     <div class='btn-group'>
                         <a href="{!! route('app.meetings.show', [$meeting->hashid]) !!}"
-                           class='btn btn-floating waves-effect waves-light'>
+                           class='btn btn-floating waves-effect waves-light green'>
                             <i class="material-icons">remove_red_eye</i></a>
                         <a href="{!! route('app.meetings.edit', [$meeting->hashid]) !!}"
                            class='btn btn-floating waves-effect waves-light'>

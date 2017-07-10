@@ -37,7 +37,7 @@ class Meeting extends Model
      */
     public function getDateAttribute()
     {
-        return $this->attributes['date'] = Carbon::parse($this->attributes['date'])->format('Y-m-d');
+        return $this->attributes['date'] = Carbon::parse($this->attributes['date'])->format('d-m-Y');
     }
 
     /**

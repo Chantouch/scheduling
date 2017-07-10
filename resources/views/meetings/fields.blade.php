@@ -51,8 +51,8 @@
 
     <div class="input-field col s12">
         <div class="actions clearfix">
-            {!! Form::submit('Save', ['class'=>'waves-effect waves-blue btn-flat']) !!}
-            <a href="{!! route('app.meetings.index') !!}" class="waves-effect waves-blue btn-flat">Cancel</a>
+            {!! Form::submit('Save', ['class'=>'waves-effect waves-blue btn blue']) !!}
+            <a href="{!! route('app.meetings.index') !!}" class="waves-effect waves-blue btn red">Cancel</a>
         </div>
     </div>
 </div>

@@ -72,12 +72,12 @@ class MeetingController extends Controller
             }
             DB::commit();
             $dataRedis = [
-                'event' =>  'alert',
-                'data'  => [
-                    'meeting_data'=>  $meeting,
+                'event' => 'create-meeting',
+                'data' => [
+                    'meeting_data' => $meeting,
                 ]
             ];
-            Redis::publish('alert-channel', json_encode($dataRedis));
+            Redis::publish('create-meeting-channel', json_encode($dataRedis));
             return redirect()->route('app.meetings.index')->with('success', 'Meeting added successfully');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
@@ -150,7 +150,14 @@ class MeetingController extends Controller
                 return response()->json('Can not add update record');
             }
             DB::commit();
-            return redirect()->route('meetings.index')->with('success', 'Meeting updated successfully');
+            $dataRedis = [
+                'event' => 'update-meeting',
+                'data' => [
+                    'meeting_data' => $meeting,
+                ]
+            ];
+            Redis::publish('update-meeting-channel', json_encode($dataRedis));
+            return redirect()->route('app.meetings.index')->with('success', 'Meeting updated successfully');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add update record');
@@ -172,6 +179,13 @@ class MeetingController extends Controller
         }
         $meeting = Meeting::with('user')->find($id);
         $delete = $meeting->delete();
+        $dataRedis = [
+            'event' => 'delete-meeting',
+            'data' => [
+                'meeting_data' => $meeting,
+            ]
+        ];
+        Redis::publish('delete-meeting-channel', json_encode($dataRedis));
         if (!$delete) {
             DB::rollBack();
             return response()->json('Can not delete meeting');

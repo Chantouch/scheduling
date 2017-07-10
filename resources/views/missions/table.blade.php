@@ -13,7 +13,7 @@
         <tbody>
         <?php $i = 1?>
         @foreach($missions as $mission)
-            <tr>
+            <tr id="{!! $mission->hashid !!}">
                 <td>{!! $i++ !!}</td>
                 <td>{!! $mission->start_date.' to '.$mission->end_date !!}</td>
                 <td>{!! $mission->leader !!}</td>
@@ -23,15 +23,15 @@
                     {{--{!! Form::open(['route' => ['meetings.destroy', $mission->hashid], 'method' => 'delete', 'class'=>'form-width-70', 'id' => 'action_form']) !!}--}}
                     <div class='btn-group'>
                         <a href="{!! route('app.missions.show', [$mission->hashid]) !!}"
-                           class='btn btn-default btn-xs'>
-                            <i class="material-icons">view_day</i></a>
+                           class='btn btn-floating green'>
+                            <i class="material-icons">remove_red_eye</i></a>
                         <a href="{!! route('app.missions.edit', [$mission->hashid]) !!}"
-                           class='btn btn-default btn-xs'>
-                            <i class="material-icons">query_builder</i></a>
+                           class='btn btn-floating'>
+                            <i class="material-icons">mode_edit</i></a>
                         {{--{!! Form::button('<i class="material-icons">info_outline</i>', ['type' => 'button', 'class' => 'btn btn-danger waves-effect waves-light btn-xs delete', 'id' => "delete_btn"]) !!}--}}
-                        <button class="btn btn-danger waves-effect waves-light btn-sm delete" type="button"
+                        <button class="btn btn-floating waves-effect waves-light delete red" type="button"
                                 value="{{ $mission->hashid }}">
-                            <i class="material-icons">info_outline</i>
+                            <i class="material-icons">delete</i>
                         </button>
                     </div>
                     {{--{!! Form::close() !!}--}}

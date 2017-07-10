@@ -12,7 +12,7 @@
                     </div>
                     <div class="col s6 l6">
                         <div class="right m-t-lg">
-                            <a href="{!! route('app.meetings.create') !!}" class="waves-effect waves-blue btn-flat">Add
+                            <a href="{!! route('app.meetings.create') !!}" class="waves-effect waves-blue btn">Add
                                 more</a>
                         </div>
                     </div>
@@ -64,12 +64,11 @@
                     headers: token
                 }).done(function (data) {
                     swal("Window Meeting Deleted!", data, "success");
-                    //$(this).closest("tr").fadeOut(800);
                     setTimeout(function () {
-                        window.location.reload();
+                        $('table.bordered').find('tr#' + id).fadeOut('slow');
                     }, 1500);
                 }).error(function (data) {
-                    swal("Oops", "We couldn't connect to the server!", "error");
+                    swal("Oops", data, "error");
                 });
             });
         });

@@ -6,6 +6,7 @@ use App\Model\Mission;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Vinkla\Hashids\HashidsManager;
 
@@ -68,7 +69,14 @@ class MissionController extends Controller
                 return response()->json('Can not add new record');
             }
             DB::commit();
-            return redirect()->route('missions.index')->with('success', 'Mission added successfully');
+            $dataRedis = [
+                'event' => 'create-mission',
+                'data' => [
+                    'mission_data' => $mission,
+                ]
+            ];
+            Redis::publish('create-mission-channel', json_encode($dataRedis));
+            return redirect()->route('app.missions.index')->with('success', 'Mission added successfully');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add new record');
@@ -139,7 +147,14 @@ class MissionController extends Controller
                 return response()->json('Can not add update record');
             }
             DB::commit();
-            return redirect()->route('missions.index')->with('success', 'Mission updated successfully');
+            $dataRedis = [
+                'event' => 'update-mission',
+                'data' => [
+                    'mission_data' => $mission,
+                ]
+            ];
+            Redis::publish('update-mission-channel', json_encode($dataRedis));
+            return redirect()->route('app.missions.index')->with('success', 'Mission updated successfully');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add update record');
@@ -165,6 +180,13 @@ class MissionController extends Controller
             DB::rollBack();
             return response()->json('Can not delete mission');
         }
+        $dataRedis = [
+            'event' => 'delete-mission',
+            'data' => [
+                'mission_data' => $mission,
+            ]
+        ];
+        Redis::publish('delete-mission-channel', json_encode($dataRedis));
         return response()->json('Mission delete successfully');
     }
 

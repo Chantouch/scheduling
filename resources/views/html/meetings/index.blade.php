@@ -2,7 +2,7 @@
 @section('style')
     <style>
         .card {
-        / / height: 95.8 vh;
+        /*height: 95.8 vh;*/
         }
     </style>
 @stop
@@ -52,33 +52,45 @@
             // var socket = io('192.241.170.241:3000'); // Server or Domain IP Address // For HTTP
             // let socket = io.connect('https://cambodianmatch.com:45621', {secure: true}); // For HTTPS
             // Message Notification real Time
-            socket.on('alert-channel:alert', function (message) {
+            socket.on('create-meeting-channel:create-meeting', function (message) {
                 let meeting_data = message.meeting_data;
                 console.log(message);
-                let html = '<tr><td>' + meeting_data.date + '</td>'
+                let html = '<tr id="' + meeting_data.hashid + '"><td>' + meeting_data.date + '</td>'
                     + '<td>' + meeting_data.time + '</td>'
                     + '<td>' + meeting_data.subject + '</td>'
                     + '<td>' + meeting_data.related_org + '</td>'
                     + '<td>' + meeting_data.location + '</td></tr>';
-                $('table.bordered').append(html);
+                setTimeout(function () {
+                    $('table.bordered').append(html);
+                }, 1000);
             });
-        });
 
-        $(".delete").click(function () {
-            let id = $(this).val();
-            let $con = confirm('Are you sure to delete this image');
-            if ($con) {
-                $.ajax({
-                    url: "/app/meetings/" + id,
-                    data: {"_token": "{{ csrf_token() }}"},
-                    type: 'DELETE',
-                    success: function (result) {
-                        console.log(result);
-                    }
-                });
-                $(this).closest("tr").fadeOut(800);
-                //$(this).closest("tr").remove();
-            }
+            socket.on('update-meeting-channel:update-meeting', function (message) {
+                let meeting_data = message.meeting_data;
+                console.log(message);
+                let html = '<tr id="' + meeting_data.hashid + '"><td>' + meeting_data.date + '</td>'
+                    + '<td>' + meeting_data.time + '</td>'
+                    + '<td>' + meeting_data.subject + '</td>'
+                    + '<td>' + meeting_data.related_org + '</td>'
+                    + '<td>' + meeting_data.location + '</td></tr>';
+                setTimeout(function () {
+                    $('table.bordered').find('tr#' + meeting_data.hashid).replaceWith(html);
+                }, 1000);
+            });
+
+            socket.on('delete-meeting-channel:delete-meeting', function (message) {
+                let meeting_data = message.meeting_data;
+                console.log(message);
+                let html = '<tr id="' + meeting_data.hashid + '"><td>' + meeting_data.date + '</td>'
+                    + '<td>' + meeting_data.time + '</td>'
+                    + '<td>' + meeting_data.subject + '</td>'
+                    + '<td>' + meeting_data.related_org + '</td>'
+                    + '<td>' + meeting_data.location + '</td></tr>';
+                setTimeout(function () {
+                    $('table.bordered').find('tr#' + meeting_data.hashid).fadeOut('slow');
+                }, 1500);
+            });
+
         });
 
         $('#clock').fitText(1.3);
@@ -90,5 +102,12 @@
             $('#year').html(moment().format('YYYY'));
         }
         setInterval(update, 1000);
+
+        $(function animateHeart() {
+            $('.heart span').animate({
+                fontSize: $('.heart span').css('fontSize') === '75px' ? '50px' : '75px'
+            }, 500, animateHeart);
+        });
+
     </script>
 @stop

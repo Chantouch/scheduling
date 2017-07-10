@@ -2,7 +2,7 @@
 <html lang="{{ app()->getLocale() }}">
 <head>
     <!-- Title -->
-    <title>Scheduling | Responsive Admin Dashboard Template</title>
+    <title>{{ config('app.name', 'Admin Scheduling') }}</title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
@@ -29,15 +29,18 @@
 
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
-
-    <title>{{ config('app.name', 'Admin Scheduling') }}</title>
-
+    <!-- Scripts -->
+    <script>
+        window.Laravel = {!! json_encode([
+            'csrfToken' => csrf_token(),
+        ]) !!};
+    </script>
     <!-- Styles -->
     @yield('style')
 </head>
 <body>
 <div class="loader-bg"></div>
-<div class="loader">
+<div class="loader" id="app">
     <div class="preloader-wrapper big active">
         <div class="spinner-layer spinner-blue">
             <div class="circle-clipper left">
@@ -252,7 +255,7 @@
                     <div class="card card-transparent">
                         <div class="row valign-wrapper">
                             <div class="col s3">
-                                <img src="assets/images/profile-image-3.jpg" alt=""
+                                <img src="{!! asset('assets/images/profile-image-3.jpg') !!}" alt=""
                                      class="circle responsive-img z-depth-1">
                             </div>
                             <div class="col s9">
@@ -267,7 +270,7 @@
                     <div class="card card-transparent">
                         <div class="row valign-wrapper">
                             <div class="col s3">
-                                <img src="assets/images/profile-image.png" alt=""
+                                <img src="{!! asset('assets/images/profile-image.png') !!}" alt=""
                                      class="circle responsive-img z-depth-1">
                             </div>
                             <div class="col s9">
@@ -359,7 +362,7 @@
                     <a href="javascript:void(0)" class="chat-message">
                         <div class="chat-item">
                             <div class="chat-item-image">
-                                <img src="assets/images/profile-image.png" class="circle" alt="">
+                                <img src="{!! asset('assets/images/profile-image.png') !!}" class="circle" alt="">
                             </div>
                             <div class="chat-item-info">
                                 <p class="chat-name">John Doe</p>
@@ -370,7 +373,7 @@
                     <a href="javascript:void(0)" class="chat-message">
                         <div class="chat-item">
                             <div class="chat-item-image">
-                                <img src="assets/images/profile-image-1.png" class="circle" alt="">
+                                <img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle" alt="">
                             </div>
                             <div class="chat-item-info">
                                 <p class="chat-name">Tom Simpson</p>
@@ -381,7 +384,7 @@
                     <a href="javascript:void(0)" class="chat-message">
                         <div class="chat-item">
                             <div class="chat-item-image">
-                                <img src="assets/images/profile-image-3.jpg" class="circle" alt="">
+                                <img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle" alt="">
                             </div>
                             <div class="chat-item-info">
                                 <p class="chat-name">Alan Grey</p>
@@ -391,7 +394,7 @@
                     <a href="javascript:void(0)" class="chat-message">
                         <div class="chat-item">
                             <div class="chat-item-image">
-                                <img src="assets/images/profile-image.png" class="circle" alt="">
+                                <img src="{!! asset('assets/images/profile-image.png') !!}" class="circle" alt="">
                             </div>
                             <div class="chat-item-info">
                                 <p class="chat-name">Michael Fisher</p>
@@ -402,7 +405,7 @@
                     <a href="javascript:void(0)" class="chat-message">
                         <div class="chat-item">
                             <div class="chat-item-image">
-                                <img src="assets/images/profile-image-1.png" class="circle" alt="">
+                                <img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle" alt="">
                             </div>
                             <div class="chat-item-info">
                                 <p class="chat-name">Amily Lee</p>
@@ -413,7 +416,7 @@
                     <a href="javascript:void(0)" class="chat-message">
                         <div class="chat-item">
                             <div class="chat-item-image">
-                                <img src="assets/images/profile-image.png" class="circle" alt="">
+                                <img src="{!! asset('assets/images/profile-image.png') !!}" class="circle" alt="">
                             </div>
                             <div class="chat-item-info">
                                 <p class="chat-name">Sandra Smith</p>
@@ -424,7 +427,7 @@
                     <a href="javascript:void(0)" class="chat-message">
                         <div class="chat-item">
                             <div class="chat-item-image">
-                                <img src="assets/images/profile-image-3.jpg" class="circle" alt="">
+                                <img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle" alt="">
                             </div>
                             <div class="chat-item-info">
                                 <p class="chat-name">Sandra Smith</p>
@@ -531,27 +534,27 @@
                         class="material-icons">keyboard_arrow_right</i></a></p>
         <div class="messages-container">
             <div class="message-wrapper them">
-                <div class="circle-wrapper"><img src="assets/images/profile-image-1.png" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle" alt=""></div>
                 <div class="text-wrapper">Lorem Ipsum</div>
             </div>
             <div class="message-wrapper me">
-                <div class="circle-wrapper"><img src="assets/images/profile-image-3.jpg" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle" alt=""></div>
                 <div class="text-wrapper">Integer in faucibus diam?</div>
             </div>
             <div class="message-wrapper them">
-                <div class="circle-wrapper"><img src="assets/images/profile-image-1.png" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle" alt=""></div>
                 <div class="text-wrapper">Vivamus quis neque volutpat, hendrerit justo vitae, suscipit dui</div>
             </div>
             <div class="message-wrapper me">
-                <div class="circle-wrapper"><img src="assets/images/profile-image-3.jpg" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle" alt=""></div>
                 <div class="text-wrapper">Suspendisse condimentum tortor et lorem pretium</div>
             </div>
             <div class="message-wrapper them">
-                <div class="circle-wrapper"><img src="assets/images/profile-image-1.png" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle" alt=""></div>
                 <div class="text-wrapper">dolore eu fugiat nulla pariatur</div>
             </div>
             <div class="message-wrapper me">
-                <div class="circle-wrapper"><img src="assets/images/profile-image-3.jpg" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle" alt=""></div>
                 <div class="text-wrapper">Duis maximus leo eget massa porta</div>
             </div>
         </div>
@@ -615,6 +618,7 @@
 <div class="left-sidebar-hover"></div>
 
 <!-- Javascripts -->
+<script src="{!! asset('js/app.js') !!}"></script>
 <script src="{!! asset('assets/plugins/jquery/jquery-2.2.0.min.js') !!}"></script>
 <script src="{!! asset('assets/plugins/materialize/js/materialize.min.js') !!}"></script>
 <script src="{!! asset('assets/plugins/material-preloader/js/materialPreloader.min.js') !!}"></script>
