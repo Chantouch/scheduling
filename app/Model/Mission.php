@@ -20,8 +20,8 @@ class Mission extends Model
     public static function rules()
     {
         return [
-            'start_date' => 'required|date',
-            'end_date' => 'required|date'
+            'start_date' => 'required|date|before:end_date',
+            'end_date' => 'required|date|after:start_date'
         ];
     }
 

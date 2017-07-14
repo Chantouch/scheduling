@@ -12,8 +12,9 @@
                     </div>
                     <div class="col s6 l6">
                         <div class="right m-t-lg">
-                            <a href="{!! route('app.meetings.create') !!}" class="waves-effect waves-blue btn">Add
-                                more</a>
+                            <a href="{!! route('app.meetings.create') !!}" class="waves-effect waves-blue btn">
+                                បន្ថែមថ្មី
+                            </a>
                         </div>
                     </div>
                 </div>

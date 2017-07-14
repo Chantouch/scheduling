@@ -13,7 +13,7 @@ class Meeting extends Model
     use SoftDeletes;
     protected $appends = ['hashid'];
     protected $fillable = [
-        'date', 'time', 'subject', 'related_org', 'location', 'user_id', 'ampm'
+        'date', 'start_time', 'end_time', 'subject', 'related_org', 'location', 'user_id', 'ampm'
     ];
 
     protected $dates = ['date'];
@@ -21,7 +21,9 @@ class Meeting extends Model
     public static function rules()
     {
         return [
-            'date' => 'required|date'
+            'date' => 'required|date',
+            'start_time' => 'required|before:end_time',
+            'end_time' => 'required|after:start_time'
         ];
     }
 
@@ -43,9 +45,17 @@ class Meeting extends Model
     /**
      * @return string
      */
-    public function getTimeAttribute()
+    public function getStartTimeAttribute()
     {
-        return $this->attributes['time'] = Carbon::parse($this->attributes['time'])->format('H:i');
+        return $this->attributes['start_time'] = Carbon::parse($this->attributes['start_time'])->format('H:i');
+    }
+
+    /**
+     * @return string
+     */
+    public function getEndTimeAttribute()
+    {
+        return $this->attributes['end_time'] = Carbon::parse($this->attributes['end_time'])->format('H:i');
     }
 
     /**

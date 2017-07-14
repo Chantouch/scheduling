@@ -50,7 +50,7 @@
                 let data = message.mission_data;
                 console.log(message);
                 let html = '<tr id="' + data.hashid + '">'
-                    + '<td>' + data.start_date + ' to ' + data.end_date + '</td>'
+                    + '<td>' + data.start_date + ' - ' + data.end_date + '</td>'
                     + '<td>' + data.leader + '</td>'
                     + '<td>' + data.mission + '</td>'
                     + '<td>' + data.offer_to + '</td></tr>';
@@ -63,7 +63,7 @@
                 let data = message.mission_data;
                 console.log(message);
                 let html = '<tr id="' + data.hashid + '">'
-                    + '<td>' + data.start_date + 'to' + data.end_date + '</td>'
+                    + '<td>' + data.start_date + ' - ' + data.end_date + '</td>'
                     + '<td>' + data.leader + '</td>'
                     + '<td>' + data.mission + '</td>'
                     + '<td>' + data.offer_to + '</td></tr>';

@@ -17,7 +17,7 @@
             <tr id="{!! $meeting->hashid !!}">
                 <td>{!! $i++ !!}</td>
                 <td>{!! $meeting->date !!}</td>
-                <td>{!! $meeting->time !!}</td>
+                <td>{!! $meeting->start_time.' - '.$meeting->end_time !!}</td>
                 <td>{!! $meeting->subject !!}</td>
                 <td>{!! $meeting->related_org !!}</td>
                 <td>{!! $meeting->location !!}</td>

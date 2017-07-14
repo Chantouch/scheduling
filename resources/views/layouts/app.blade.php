@@ -104,23 +104,33 @@
     </div>
 </div>
 <div class="mn-content fixed-sidebar">
-    <main class="">
-        @if ($message = Session::get('success'))
-            <div class="alert alert-success">
-                <p>{{ $message }}</p>
-            </div>
-        @endif
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
+    <main id="app">
         <div class="row">
+            @if ($message = Session::get('success'))
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
+            @if ($message = Session::get('error'))
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span></button>
+                    <p>{{ $message }}</p>
+                </div>
+            @endif
+
+            @if (count($errors) > 0)
+                <div class="alert alert-danger">
+                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             @yield('content')
         </div>
     </main>
@@ -128,6 +138,7 @@
 <div class="left-sidebar-hover"></div>
 
 <!-- Javascripts -->
+<script src="{!! asset('js/app.js') !!}"></script>
 <script src="{!! asset('assets/plugins/jquery/jquery-2.2.0.min.js') !!}"></script>
 <script src="{!! asset('assets/plugins/materialize/js/materialize.min.js') !!}"></script>
 <script src="{!! asset('assets/plugins/material-preloader/js/materialPreloader.min.js') !!}"></script>

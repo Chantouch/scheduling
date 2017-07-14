@@ -48,23 +48,15 @@
             <a class="waves-effect waves-grey" href="#!">
                 <i class="material-icons">settings_input_svideo</i>Dashboard
             </a>
-        </li>
-        <li class="no-padding">
-            <a class="collapsible-header waves-effect waves-grey{{ Request::is('app/*') ? ' active' : '' }}"><i
-                        class="material-icons">apps</i>Apps<i
-                        class="nav-drop-icon material-icons">keyboard_arrow_right</i></a>
-            <div class="collapsible-body">
-                <ul>
-                    <li>
-                        <a href="{!! route('app.meetings.index') !!}"
-                           class="{{ Request::is('app/meetings*') ? 'active-page' : '' }}">Meetings</a>
-                    </li>
-                    <li>
-                        <a href="{!! route('app.missions.index') !!}"
-                           class="{{ Request::is('app/missions*') ? 'active-page' : '' }}">Missions</a>
-                    </li>
-                </ul>
-            </div>
+            <a href="{!! route('app.meetings.index') !!}"
+               class="{{ Request::is('app/meetings*') ? 'active-page' : '' }}">
+                <i class="material-icons">settings_input_svideo</i> កិច្ចប្រជុំ
+            </a>
+
+            <a href="{!! route('app.missions.index') !!}"
+               class="{{ Request::is('app/missions*') ? 'active-page' : '' }}">
+                <i class="material-icons">settings_input_svideo</i> បេសកកម្ម
+            </a>
         </li>
     </ul>
     <div class="footer">

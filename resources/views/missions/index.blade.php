@@ -13,7 +13,7 @@
                     <div class="col s6 l6">
                         <div class="right m-t-lg">
                             <a href="{!! route('app.missions.create') !!}" class="waves-effect waves-blue btn">
-                                Add more
+                                បន្ថែមថ្មី
                             </a>
                         </div>
                     </div>
@@ -27,35 +27,19 @@
 @section('script')
     <script src="{!! asset('assets/plugins/sweetalert/sweetalert.min.js') !!}"></script>
     <script>
-        $(".deletes").click(function () {
-            let id = $(this).val();
-            let $con = confirm('Are you sure to delete this image');
-            if ($con) {
-                $.ajax({
-                    url: "/app/missions/" + id,
-                    data: {"_token": "{{ csrf_token() }}"},
-                    type: 'DELETE',
-                    success: function (result) {
-                        console.log(result);
-                    }
-                });
-                $(this).closest("tr").fadeOut(800);
-                //$(this).closest("tr").remove();
-            }
-        });
         $(document).on('click', '.delete', function (e) {
             e.preventDefault();
             let id = $(this).val();
             let route = '/app/missions/' + id;
             let token = {'X-CSRF-TOKEN': $("[name='_token']:first").val()};
             swal({
-                title: "Window Meeting Deletion",
-                text: "Are you absolutely sure you want to delete ? This action cannot be undone." +
-                "This will permanently delete, and remove all collections and materials associations.",
+                title: "លោកអ្នកកំពុងលុប បេសកកម្ម",
+                text: "តើលោកអ្នកចង់លុបបេសកកម្មនេះមែនទេ? ប៉ុន្តែលោកអ្នកនៅតែអាចទាញយកមកវិញបាន។",
                 type: "warning",
                 showCancelButton: true,
                 closeOnConfirm: false,
-                confirmButtonText: "Delete",
+                confirmButtonText: "យល់ព្រម",
+                cancelButtonText: "បោះបង់",
                 confirmButtonColor: "#ec6c62"
             }, function () {
                 $.ajax({
@@ -63,7 +47,7 @@
                     url: route,
                     headers: token
                 }).done(function (data) {
-                    swal("Window Meeting Deleted!", data, "success");
+                    swal("បេសកកម្មបានលុបដោយជោគជ័យ", data, "success");
                     setTimeout(function () {
                         $('table.bordered').find('tr#' + id).fadeOut('slow');
                     }, 1500);

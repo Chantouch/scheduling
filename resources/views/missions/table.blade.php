@@ -15,7 +15,7 @@
         @foreach($missions as $mission)
             <tr id="{!! $mission->hashid !!}">
                 <td>{!! $i++ !!}</td>
-                <td>{!! $mission->start_date.' to '.$mission->end_date !!}</td>
+                <td>{!! $mission->start_date.' - '.$mission->end_date !!}</td>
                 <td>{!! $mission->leader !!}</td>
                 <td>{!! $mission->mission !!}</td>
                 <td>{!! $mission->offer_to !!}</td>

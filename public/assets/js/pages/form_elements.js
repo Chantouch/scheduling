@@ -9,9 +9,9 @@ $(document).ready(function () {
     });
 
     $('.timepicker').pickatime({
-        autoclose: false,
-        ampmclickable: true,
-        twelvehour: true,
+        autoclose: true,
+        ampmclickable: false,
+        twelvehour: false,
         afterDone: function (Element, Time) {
             console.log(Element, Time);
         }

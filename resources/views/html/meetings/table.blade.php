@@ -11,9 +11,10 @@
         </thead>
         <tbody>
         @foreach($meetings as $meeting)
-            <tr id="{!! $meeting->hashid !!}">
+            <tr id="{!! $meeting->hashid !!}"
+                class="@if($meeting->start_time <= date('H:i') && $meeting->end_time >= date('H:i')){!! 'meeting-now' !!}@endif">
                 <td>{!! $meeting->date !!}</td>
-                <td>{!! $meeting->time !!}</td>
+                <td>{!! $meeting->start_time.' - '.$meeting->end_time !!}</td>
                 <td>{!! $meeting->subject !!}</td>
                 <td>{!! $meeting->related_org !!}</td>
                 <td>{!! $meeting->location !!}</td>
@@ -22,7 +23,7 @@
         </tbody>
     </table>
 @endif
-
+{{--<meetings></meetings>--}}
 <div class="center">
-    <p class="heart">Touch <span>♥</span> Sek</p>
+    {{--<p class="heart">TH <span>♥</span> HT</p>--}}
 </div>

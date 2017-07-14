@@ -16,7 +16,8 @@ class CreateMeetingsTable extends Migration
         Schema::create('meetings', function (Blueprint $table) {
             $table->increments('id');
             $table->date('date')->nullable();
-            $table->time('time')->nullable();
+            $table->time('start_time')->nullable();
+            $table->time('end_time')->nullable();
             $table->string('ampm')->nullable();
             $table->string('subject')->nullable();
             $table->string('related_org')->nullable();

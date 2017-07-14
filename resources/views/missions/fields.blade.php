@@ -1,7 +1,7 @@
 <div class="row">
     <div class="input-field col s6{!! $errors->has('name') ? ' invalid' : '' !!}">
         {!! Form::text('start_date', null, ['class'=> 'validate datepicker','placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
-        <label for="start_date">Start date</label>
+        <label for="start_date">ថ្ងៃចាប់ផ្តើម</label>
         @if($errors->has('start_date'))
             <label id="start_date-error" class="error" for="start_date">
                 <strong>{!! $errors->first('start_date') !!}</strong>
@@ -11,7 +11,7 @@
 
     <div class="input-field col s6">
         {!! Form::text('end_date', null, ['class' => 'validate datepicker', 'placeholder' => 'ម៉ោង']) !!}
-        <label for="end_date">End date</label>
+        <label for="end_date">ថ្ងៃបញ្ចប់</label>
         @if($errors->has('end_date'))
             <label id="end_date-error" class="error" for="end_date">
                 <strong>{!! $errors->first('end_date') !!}</strong>
@@ -21,7 +21,7 @@
 
     <div class="input-field col s12">
         {!! Form::text('leader', null, ['class'=>'validate', 'placeholder' => '']) !!}
-        <label for="leader">Leader</label>
+        <label for="leader">ថ្នាក់ដឹកនាំ</label>
         @if($errors->has('leader'))
             <label id="leader-error" class="error" for="leader">
                 <strong>{!! $errors->first('leader') !!}</strong>
@@ -31,7 +31,7 @@
 
     <div class="input-field col s12">
         {!! Form::text('mission', null, ['class' => 'validate', 'placeholder' => '']) !!}
-        <label for="mission">Mission</label>
+        <label for="mission">បេសកកម្ម</label>
         @if($errors->has('mission'))
             <label id="mission-error" class="error" for="mission">
                 <strong>{!! $errors->first('mission') !!}</strong>
@@ -41,7 +41,7 @@
 
     <div class="input-field col s12">
         {!! Form::text('offer_to', null, ['class'=>'validate', 'placeholder' => '']) !!}
-        <label for="location">Offer to</label>
+        <label for="location">ផ្ទេរសិទ្ធ</label>
         @if($errors->has('offer_to'))
             <label id="offer_to-error" class="error" for="offer_to">
                 <strong>{!! $errors->first('offer_to') !!}</strong>
@@ -51,8 +51,8 @@
 
     <div class="input-field col s12">
         <div class="actions clearfix">
-            {!! Form::submit('Save', ['class'=>'waves-effect waves-blue btn-flat']) !!}
-            <a href="{!! route('app.missions.index') !!}" class="waves-effect waves-blue btn-flat">Cancel</a>
+            {!! Form::submit('រក្សាទុក', ['class'=>'waves-effect waves-blue btn green']) !!}
+            <a href="{!! route('app.missions.index') !!}" class="waves-effect waves-blue btn red">បោះបង់</a>
         </div>
     </div>
 </div>
