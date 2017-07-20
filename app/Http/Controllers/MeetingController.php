@@ -61,7 +61,7 @@ class MeetingController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
-            $data['date'] = date('Y-m-d', strtotime($request->date));
+            $data['meeting_date'] = date('Y-m-d', strtotime($request->meeting_date));
             $data['time'] = date('H:i:s', strtotime($request->time));
             $data['user_id'] = $this->guard()->id;
             $data['ampm'] = substr(date('H:i:s A', strtotime($request->time)), -2);
@@ -78,7 +78,7 @@ class MeetingController extends Controller
                 ]
             ];
             Redis::publish('create-meeting-channel', json_encode($dataRedis));
-            return redirect()->route('app.meetings.index')->with('success', 'Meeting added successfully');
+            return redirect()->route('app.meetings.index')->with('success', 'ប្រជុំបានបន្ថែមដោយជោគជ័យ។');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add new record');
@@ -141,7 +141,7 @@ class MeetingController extends Controller
             if ($validator->fails()) {
                 return redirect()->back()->withErrors($validator)->withInput();
             }
-            $data['date'] = date('Y-m-d', strtotime($request->date));
+            $data['meeting_date'] = date('Y-m-d', strtotime($request->meeting_date));
             $data['time'] = date('H:i:s', strtotime($request->time));
             $data['ampm'] = substr(date('H:i:s A', strtotime($request->time)), -2);
             $update = $meeting->update($data);
@@ -157,7 +157,7 @@ class MeetingController extends Controller
                 ]
             ];
             Redis::publish('update-meeting-channel', json_encode($dataRedis));
-            return redirect()->route('app.meetings.index')->with('success', 'Meeting updated successfully');
+            return redirect()->route('app.meetings.index')->with('message', 'ប្រជុំបានកែប្រែដោយជោគជ័យ។');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add update record');
@@ -190,7 +190,7 @@ class MeetingController extends Controller
             DB::rollBack();
             return response()->json('Can not delete meeting');
         }
-        return response()->json('Meeting delete successfully');
+        return response()->json('ប្រជុំបានលុបដោយជោគជ័យ។');
     }
 
     /**

@@ -76,7 +76,7 @@ class MissionController extends Controller
                 ]
             ];
             Redis::publish('create-mission-channel', json_encode($dataRedis));
-            return redirect()->route('app.missions.index')->with('success', 'Mission added successfully');
+            return redirect()->route('app.missions.index')->with('success', 'បេសកកម្មបានបន្ថែមដោយជោគជ័យ។');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add new record');
@@ -154,7 +154,7 @@ class MissionController extends Controller
                 ]
             ];
             Redis::publish('update-mission-channel', json_encode($dataRedis));
-            return redirect()->route('app.missions.index')->with('success', 'Mission updated successfully');
+            return redirect()->route('app.missions.index')->with('success', 'បេសកកម្មបានកែប្រែដោយជោគជ័យ។');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add update record');
@@ -187,7 +187,7 @@ class MissionController extends Controller
             ]
         ];
         Redis::publish('delete-mission-channel', json_encode($dataRedis));
-        return response()->json('Mission delete successfully');
+        return response()->json('បេសកកម្មបានលុបដោយជោគជ័យ។');
     }
 
 

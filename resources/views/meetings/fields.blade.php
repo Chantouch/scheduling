@@ -1,9 +1,9 @@
-<div class="input-field col s4{!! $errors->has('name') ? ' invalid' : '' !!}">
-    {!! Form::text('date', null, ['class'=> 'validate datepicker','placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
-    <label for="date">កាលបរិច្ឆេទ</label>
-    @if($errors->has('date'))
-        <label id="date-error" class="error" for="date">
-            <strong>{!! $errors->first('date') !!}</strong>
+<div class="input-field col s4{!! $errors->has('meeting_date') ? ' invalid' : '' !!}">
+    {!! Form::text('meeting_date', null, ['class'=> 'validate datepicker','placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
+    <label for="meeting_date">កាលបរិច្ឆេទ</label>
+    @if($errors->has('meeting_date'))
+        <label id="meeting_date-error" class="error" for="meeting_date">
+            <strong>{!! $errors->first('meeting_date') !!}</strong>
         </label>
     @endif
 </div>
@@ -60,7 +60,8 @@
 
 <div class="input-field col s12">
     <div class="actions clearfix">
-        {!! Form::submit('រក្សាទុក', ['class'=>'waves-effect waves-blue btn blue']) !!}
+        {{--{!! Form::submit('រក្សាទុក', ['class'=>'waves-effect waves-blue btn blue']) !!}--}}
+        <button type="submit" class="waves-effect waves-blue btn blue">រក្សាទុក</button>
         <a href="{!! route('app.meetings.index') !!}" class="waves-effect waves-blue btn red">បោះបង់</a>
     </div>
 </div>

@@ -110,14 +110,14 @@
                 <div class="col s12 m6 l4 offset-l4 offset-m3">
                     <div class="card white darken-1">
                         <div class="card-content ">
-                            <span class="card-title">Sign In</span>
+                            <span class="card-title">ចូលប្រព័ន្ធ</span>
                             <div class="row">
                                 <form class="col s12" role="form" method="POST" action="{{ route('login') }}">
                                     {{ csrf_field() }}
                                     <div class="input-field col s12"{{ $errors->has('email') ? ' has-error' : '' }}>
                                         <input id="email" type="email" class="validate" value="{{ old('email') }}"
                                                name="email" required autofocus>
-                                        <label for="email">Email</label>
+                                        <label for="email">អ៊ីម៉ែល</label>
                                         @if ($errors->has('email'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('email') }}</strong>
@@ -126,27 +126,30 @@
                                     </div>
                                     <div class="input-field col s12">
                                         <input id="password" type="password" class="validate" name="password">
-                                        <label for="password">Password</label>
+                                        <label for="password">លេខសម្ងាត់</label>
                                         @if ($errors->has('password'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('password') }}</strong>
                                             </span>
                                         @endif
                                     </div>
+
                                     <div class="col s12 right-align m-t-sm">
-                                        <input type="submit" class="waves-effect waves-light btn teal" value="sign in">
-                                        <a href="{!! route('register') !!}" class="waves-effect waves-light btn teal">sign up</a>
+                                        <input type="submit" class="waves-effect waves-light btn teal" value="ចូលប្រព័ន្ធ">
+                                        {{--<a href="{!! route('register') !!}" class="waves-effect waves-light btn teal">--}}
+                                            {{--sign up--}}
+                                        {{--</a>--}}
                                     </div>
 
                                     <div class="col s12 right-align m-t-sm">
                                         <p class="p-v-xs">
-                                            <input type="checkbox" class="filled-in" id="remember-me" checked="checked"
+                                            <input type="checkbox" class="filled-in" id="remember-me" checked
                                                    name="remember" {{ old('remember') ? 'checked' : '' }}/>
-                                            <label for="remember-me">Remember Me</label>
+                                            <label for="remember-me">ចងចាំខ្ញុំ</label>
                                         </p>
 
-                                        <a class="btn btn-link" href="{{ route('password.request') }}">
-                                            Forgot Your Password?
+                                        <a class="btn btn-flat" href="{{ route('password.request') }}">
+                                            ភ្លេចលេខ សម្ងាត់?
                                         </a>
                                     </div>
                                 </form>

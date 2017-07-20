@@ -6,8 +6,12 @@
     <div class="col s12 m12 l12">
         <div class="card">
             <div class="card-content">
+                <div class="col s12">
+                    <span class="card-title">បេសកកម្ម</span>
+                    <hr>
+                    <br>
+                </div>
                 <div class="row">
-                    <span class="card-title">បេសកកម្ម</span><br>
                     {!! Form::model($mission, ['method' => 'PATCH','route' => ['app.missions.update', $mission->hashid], 'class' => '', 'role'=> 'form']) !!}
                     @include('missions.fields')
                     {!! Form::close() !!}

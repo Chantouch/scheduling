@@ -36,7 +36,7 @@
             line-height: 100px;
             margin: 150px auto 0;
             padding: 0 50px;
-            //background: #222;
+        / / background: #222;
             color: #000000;
             text-align: center;
             border-radius: 15px;
@@ -146,6 +146,7 @@
 <script src="{!! asset('assets/js/alpha.min.js') !!}"></script>
 <script src="{!! asset('assets/plugins/moment/moment.min.js') !!}"></script>
 <script src="{!! asset('assets/plugins/moment/jquery.fittext.min.js') !!}"></script>
+<script src="{!! asset('assets/plugins/moment/moment-with-locales.js') !!}"></script>
 <!-- Scripts -->
 @yield('script')
 </body>

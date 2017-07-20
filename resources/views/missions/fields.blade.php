@@ -10,7 +10,7 @@
     </div>
 
     <div class="input-field col s6">
-        {!! Form::text('end_date', null, ['class' => 'validate datepicker', 'placeholder' => 'ម៉ោង']) !!}
+        {!! Form::text('end_date', null, ['class' => 'validate datepicker', 'placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
         <label for="end_date">ថ្ងៃបញ្ចប់</label>
         @if($errors->has('end_date'))
             <label id="end_date-error" class="error" for="end_date">
@@ -51,7 +51,8 @@
 
     <div class="input-field col s12">
         <div class="actions clearfix">
-            {!! Form::submit('រក្សាទុក', ['class'=>'waves-effect waves-blue btn green']) !!}
+            {{--{!! Form::submit('រក្សាទុក', ['class'=>'waves-effect waves-blue btn green']) !!}--}}
+            <button type="submit" class="waves-effect waves-blue btn blue">រក្សាទុក</button>
             <a href="{!! route('app.missions.index') !!}" class="waves-effect waves-blue btn red">បោះបង់</a>
         </div>
     </div>

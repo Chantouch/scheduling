@@ -6,8 +6,12 @@
     <div class="col s12 m12 l12">
         <div class="card">
             <div class="card-content">
-                <span class="card-title">កិច្ចប្រជុំ</span><br>
                 <div class="row">
+                    <div class="col s12">
+                        <span class="card-title">កិច្ចប្រជុំ</span>
+                        <hr>
+                        <br>
+                    </div>
                     {!! Form::model($meeting, ['method' => 'PATCH','route' => ['app.meetings.update', $meeting->hashid], 'class' => '', 'role'=> 'form']) !!}
                     @include('meetings.fields')
                     {!! Form::close() !!}

@@ -1,5 +1,5 @@
 @if(count($missions))
-    <table class="bordered">
+    <table class="responsive-table bordered">
         <thead class="back_color">
         <tr class="border">
             <th>ល.រ</th>
@@ -23,14 +23,17 @@
                     {{--{!! Form::open(['route' => ['meetings.destroy', $mission->hashid], 'method' => 'delete', 'class'=>'form-width-70', 'id' => 'action_form']) !!}--}}
                     <div class='btn-group'>
                         <a href="{!! route('app.missions.show', [$mission->hashid]) !!}"
-                           class='btn btn-floating green'>
+                           class='btn btn-floating green tooltipped' data-position="top"
+                           data-delay="50" data-tooltip="ចុច ដើម្បីមើល">
                             <i class="material-icons">remove_red_eye</i></a>
                         <a href="{!! route('app.missions.edit', [$mission->hashid]) !!}"
-                           class='btn btn-floating'>
+                           class='btn btn-floating tooltipped' data-position="top"
+                           data-delay="50" data-tooltip="ចុច ដើម្បីកែប្រែ">
                             <i class="material-icons">mode_edit</i></a>
                         {{--{!! Form::button('<i class="material-icons">info_outline</i>', ['type' => 'button', 'class' => 'btn btn-danger waves-effect waves-light btn-xs delete', 'id' => "delete_btn"]) !!}--}}
-                        <button class="btn btn-floating waves-effect waves-light delete red" type="button"
-                                value="{{ $mission->hashid }}">
+                        <button class="btn btn-floating waves-effect waves-light delete red tooltipped" type="button"
+                                value="{{ $mission->hashid }}" data-position="top"
+                                data-delay="50" data-tooltip="ចុច ដើម្បីលុប">
                             <i class="material-icons">delete</i>
                         </button>
                     </div>

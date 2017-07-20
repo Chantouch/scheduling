@@ -110,14 +110,14 @@
                 <div class="col s12 m6 l4 offset-l4 offset-m3">
                     <div class="card white darken-1">
                         <div class="card-content ">
-                            <span class="card-title">Sign Up</span>
+                            <span class="card-title">ចុះឈ្មោះ</span>
                             <div class="row">
                                 <form class="col s12" role="form" method="POST" action="{{ route('register') }}">
                                     {{ csrf_field() }}
                                     <div class="input-field col s12">
                                         <input id="name" type="text" class="validate" value="{{ old('name') }}"
                                                name="name" required autofocus>
-                                        <label for="name">Name</label>
+                                        <label for="name">ឈ្មោះ</label>
                                         @if ($errors->has('name'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('name') }}</strong>
@@ -127,7 +127,7 @@
                                     <div class="input-field col s12">
                                         <input id="email" type="email" class="validate" value="{{ old('email') }}"
                                                name="email" required autofocus>
-                                        <label for="email">Email</label>
+                                        <label for="email">អ៊ីម៉ែល</label>
                                         @if ($errors->has('email'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('email') }}</strong>
@@ -136,7 +136,7 @@
                                     </div>
                                     <div class="input-field col s12">
                                         <input id="password" type="password" class="validate" name="password">
-                                        <label for="password">Password</label>
+                                        <label for="password">លេខសម្ងាត់</label>
                                         @if ($errors->has('password'))
                                             <span class="help-block">
                                                 <strong>{{ $errors->first('password') }}</strong>
@@ -146,13 +146,13 @@
                                     <div class="input-field col s12">
                                         <input id="password2" type="password" class="validate"
                                                name="password_confirmation">
-                                        <label for="password2">Confirm Password</label>
+                                        <label for="password2">បញ្ចាក់លេខសម្ងាត់</label>
                                     </div>
                                     <div class="col s12 right-align m-t-sm">
                                         <a href="{!! route('login') !!}" class="waves-effect waves-grey btn-flat">
-                                            Sign in
+                                            ចូលប្រព័ន្ធ
                                         </a>
-                                        <input type="submit" class="waves-effect waves-light btn teal" value="Sign Up">
+                                        <input type="submit" class="waves-effect waves-light btn teal" value="ចុះឈ្មោះ">
                                     </div>
                                 </form>
                             </div>

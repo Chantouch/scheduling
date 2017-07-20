@@ -1,0 +1,147 @@
+.card {
+    /*height: 95.8 vh;*/
+}
+
+@-webkit-keyframes invalid {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: inherit;
+    }
+}
+
+@-moz-keyframes invalid {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: inherit;
+    }
+}
+
+@-o-keyframes invalid {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: inherit;
+    }
+}
+
+@keyframes invalid {
+    from {
+        background-color: red;
+    }
+    to {
+        background-color: inherit;
+    }
+}
+
+@-webkit-keyframes valid {
+    from {
+        background-color: #0BA957;
+        color: #1f1f1f;
+    }
+    to {
+        background-color: inherit;
+    }
+}
+
+@-moz-keyframes valid {
+    from {
+        background-color: #0BA957;
+        color: #1f1f1f;
+    }
+    to {
+        background-color: inherit;
+    }
+}
+
+@-o-keyframes valid {
+    from {
+        background-color: #0BA957;
+        color: #1f1f1f;
+    }
+    to {
+        background-color: inherit;
+    }
+}
+
+@keyframes valid {
+    from {
+        background-color: #0BA957;
+        color: #1f1f1f;
+    }
+    to {
+        background-color: inherit;
+    }
+}
+
+@keyframes finished {
+    from {
+        background: #838383;
+    }
+    to {
+        background: inherit;
+    }
+}
+
+@-webkit-keyframes finished {
+    from {
+        background: #838383;
+    }
+    to {
+        background: inherit;
+    }
+}
+
+@-khtml-keyframes finished {
+    from {
+        background: #838383;
+    }
+    to {
+        background: inherit;
+    }
+}
+
+@-moz-keyframes finished {
+    from {
+        background: #838383;
+    }
+    to {
+        background: inherit;
+    }
+}
+
+@-o-keyframes finished {
+    from {
+        background: #838383;
+    }
+    to {
+        background: inherit;
+    }
+}
+
+.invalid {
+    -webkit-animation: invalid 1s infinite; /* Safari 4+ */
+    -moz-animation: invalid 1s infinite; /* Fx 5+ */
+    -o-animation: invalid 1s infinite; /* Opera 12+ */
+    animation: invalid 1s infinite; /* IE 10+ */
+}
+
+.valid {
+    -webkit-animation: valid 1s infinite; /* Safari 4+ */
+    -moz-animation: valid 1s infinite; /* Fx 5+ */
+    -o-animation: valid 1s infinite; /* Opera 12+ */
+    animation: valid 1s infinite; /* IE 10+ */
+}
+
+.finished {
+    background: #838383;
+    color: #ffffff;
+}
+
+td {
+    padding: 1em;
+}

@@ -50,13 +50,13 @@
             let route = '/app/meetings/' + id;
             let token = {'X-CSRF-TOKEN': $("[name='_token']:first").val()};
             swal({
-                title: "Window Meeting Deletion",
-                text: "Are you absolutely sure you want to delete ? This action cannot be undone." +
-                "This will permanently delete, and remove all collections and materials associations.",
+                title: "លោកអ្នកកំពុងលុប កិច្ចប្រជុំ",
+                text: "តើលោកអ្នកចង់លុបបេសកកម្មនេះមែនទេ? ប៉ុន្តែលោកអ្នកនៅតែអាចទាញយកមកវិញបាន។",
                 type: "warning",
                 showCancelButton: true,
                 closeOnConfirm: false,
-                confirmButtonText: "Delete",
+                confirmButtonText: "លុប",
+                cancelButtonText: "បោះបង់",
                 confirmButtonColor: "#ec6c62"
             }, function () {
                 $.ajax({
@@ -64,7 +64,7 @@
                     url: route,
                     headers: token
                 }).done(function (data) {
-                    swal("Window Meeting Deleted!", data, "success");
+                    swal("កិច្ចប្រជុំ បានលុបដោយជោគជ័យ", data, "success");
                     setTimeout(function () {
                         $('table.bordered').find('tr#' + id).fadeOut('slow');
                     }, 1500);

@@ -12,8 +12,9 @@ class Meeting extends Model
 {
     use SoftDeletes;
     protected $appends = ['hashid'];
+    protected $date = ['meeting_date'];
     protected $fillable = [
-        'date', 'start_time', 'end_time', 'subject', 'related_org', 'location', 'user_id', 'ampm'
+        'meeting_date', 'start_time', 'end_time', 'subject', 'related_org', 'location', 'user_id', 'ampm'
     ];
 
     protected $dates = ['date'];
@@ -21,7 +22,7 @@ class Meeting extends Model
     public static function rules()
     {
         return [
-            'date' => 'required|date',
+            'meeting_date' => 'required|date',
             'start_time' => 'required|before:end_time',
             'end_time' => 'required|after:start_time'
         ];
@@ -30,16 +31,20 @@ class Meeting extends Model
     public static function messages()
     {
         return [
-
+            'meeting_date.required' => 'ថ្ងៃប្រជុុំ ត្រូវតែបញ្ចូល',
+            'start_time.required' => 'ថ្ងៃចាប់ផ្តើម ត្រូវតែបញ្ចូល',
+            'start_time.before' => 'ថ្ងៃចាប់ផ្តើម ត្រូវតែចាប់ផ្តើមមុន ថ្ងៃបញ្ចប់',
+            'end_time.required' => 'ថ្ងៃបញ្ចប់ ត្រូវតែបញ្ចូល',
+            'end_time.after' => 'ថ្ងៃបញ្ចប់ ត្រូវតែបញ្ចប់ក្រោយ ថ្ងៃចាប់ផ្តើម',
         ];
     }
 
     /**
      * @return string
      */
-    public function getDateAttribute()
+    public function getMeetingDateAttribute()
     {
-        return $this->attributes['date'] = Carbon::parse($this->attributes['date'])->format('d-m-Y');
+        return $this->attributes['meeting_date'] = Carbon::parse($this->attributes['meeting_date'])->format('d-m-Y');
     }
 
     /**
@@ -69,5 +74,13 @@ class Meeting extends Model
     public function getHashIdAttribute()
     {
         return Hashids::encode($this->attributes['id']);
+    }
+
+    public function displayHumanTimeLeft()
+    {
+        $now = Carbon::now();
+        if ($now->diffInMinutes($this->start_time) > 0) {
+            return $now->diffInMinutes($this->start_time) . str_plural(' minutes', $now->diffInMinutes($this->start_time)) . ' left';
+        }
     }
 }

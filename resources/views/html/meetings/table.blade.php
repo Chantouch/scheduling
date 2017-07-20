@@ -1,29 +1,29 @@
+<tbody>
+<?php $time = 600; ?>
 @if(count($meetings))
-    <table class="bordered">
-        <thead class="back_color">
-        <tr class="border">
-            <th class="size">កាលបរិច្ឆេទ</th>
-            <th class="size">ម៉ោង</th>
-            <th class="size">កម្មវត្ថុ</th>
-            <th class="size">មន្រ្តីអម/អង្គភាពពាក់ព័ន្ធ</th>
-            <th class="size">ទីកន្លែង</th>
+    @foreach($meetings as $meeting)
+        <tr id="{!! $meeting->hashid !!}"
+            class="@if($meeting->meeting_date == date('d-m-Y') && $meeting->start_time <= date('H:i') && $meeting->end_time > date('H:i'))
+            {!! 'meeting-now valid' !!}
+            @endif
+            @if($meeting->end_time < date('H:i') && $meeting->meeting_date == date('d-m-Y')){!! 'finished' !!} @endif">
+            <td>{!! $meeting->meeting_date !!}</td>
+            <td data-start-time="{!! $meeting->start_time !!}"
+                data-end-time="{!! $meeting->end_time !!}">
+                {!! $meeting->start_time.' - '.$meeting->end_time !!}
+            </td>
+            <td>{!! $meeting->subject !!}</td>
+            <td>{!! $meeting->related_org !!}</td>
+            <td>{!! $meeting->location !!}</td>
         </tr>
-        </thead>
-        <tbody>
-        @foreach($meetings as $meeting)
-            <tr id="{!! $meeting->hashid !!}"
-                class="@if($meeting->start_time <= date('H:i') && $meeting->end_time >= date('H:i')){!! 'meeting-now' !!}@endif">
-                <td>{!! $meeting->date !!}</td>
-                <td>{!! $meeting->start_time.' - '.$meeting->end_time !!}</td>
-                <td>{!! $meeting->subject !!}</td>
-                <td>{!! $meeting->related_org !!}</td>
-                <td>{!! $meeting->location !!}</td>
-            </tr>
-        @endforeach
-        </tbody>
-    </table>
+    @endforeach
+@else
+    <tr>
+        <td colspan="12">
+            <div class="center">
+                <p>មិនទាន់មានការប្រជុំនៅឡើយទេ។</p>
+            </div>
+        </td>
+    </tr>
 @endif
-{{--<meetings></meetings>--}}
-<div class="center">
-    {{--<p class="heart">TH <span>♥</span> HT</p>--}}
-</div>
+</tbody>

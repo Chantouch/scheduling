@@ -534,27 +534,33 @@
                         class="material-icons">keyboard_arrow_right</i></a></p>
         <div class="messages-container">
             <div class="message-wrapper them">
-                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle"
+                                                 alt=""></div>
                 <div class="text-wrapper">Lorem Ipsum</div>
             </div>
             <div class="message-wrapper me">
-                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle"
+                                                 alt=""></div>
                 <div class="text-wrapper">Integer in faucibus diam?</div>
             </div>
             <div class="message-wrapper them">
-                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle"
+                                                 alt=""></div>
                 <div class="text-wrapper">Vivamus quis neque volutpat, hendrerit justo vitae, suscipit dui</div>
             </div>
             <div class="message-wrapper me">
-                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle"
+                                                 alt=""></div>
                 <div class="text-wrapper">Suspendisse condimentum tortor et lorem pretium</div>
             </div>
             <div class="message-wrapper them">
-                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-1.png') !!}" class="circle"
+                                                 alt=""></div>
                 <div class="text-wrapper">dolore eu fugiat nulla pariatur</div>
             </div>
             <div class="message-wrapper me">
-                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle" alt=""></div>
+                <div class="circle-wrapper"><img src="{!! asset('assets/images/profile-image-3.jpg') !!}" class="circle"
+                                                 alt=""></div>
                 <div class="text-wrapper">Duis maximus leo eget massa porta</div>
             </div>
         </div>
@@ -569,21 +575,10 @@
         @include('layouts.menu')
     </aside>
 
-    <main class="mn-inner">
+    <main class="mn-inner{{ Request::is('home*') ? ' inner-active-sidebar' : '' }}">
         @if ($message = Session::get('success'))
             <div class="alert alert-success">
                 <p>{{ $message }}</p>
-            </div>
-        @endif
-
-        @if (count($errors) > 0)
-            <div class="alert alert-danger">
-                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                <ul>
-                    @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
             </div>
         @endif
         <div class="row">
@@ -599,7 +594,16 @@
 <script src="{!! asset('assets/plugins/materialize/js/materialize.min.js') !!}"></script>
 <script src="{!! asset('assets/plugins/material-preloader/js/materialPreloader.min.js') !!}"></script>
 <script src="{!! asset('assets/plugins/jquery-blockui/jquery.blockui.js') !!}"></script>
+@yield('plugins')
 <script src="{!! asset('assets/js/alpha.min.js') !!}"></script>
+<script src="{!! asset('js/helper.js') !!}"></script>
+@if(session('message'))
+    <script>
+        setTimeout(function () {
+            Materialize.toast("{{ @session('message') }}", 5000);
+        }, 1000);
+    </script>
+@endif
 <!-- Scripts -->
 @yield('script')
 </body>

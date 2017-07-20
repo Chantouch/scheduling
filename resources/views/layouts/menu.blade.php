@@ -45,17 +45,17 @@
     </div>
     <ul class="sidebar-menu collapsible collapsible-accordion" data-collapsible="accordion">
         <li class="no-padding">
-            <a class="waves-effect waves-grey" href="#!">
-                <i class="material-icons">settings_input_svideo</i>Dashboard
+            <a class="waves-effect waves-grey" href="{!! route('home') !!}">
+                <i class="material-icons">settings_input_svideo</i>ទំព័រដើម
             </a>
             <a href="{!! route('app.meetings.index') !!}"
                class="{{ Request::is('app/meetings*') ? 'active-page' : '' }}">
-                <i class="material-icons">settings_input_svideo</i> កិច្ចប្រជុំ
+                <i class="material-icons">assessment</i> កិច្ចប្រជុំ
             </a>
 
             <a href="{!! route('app.missions.index') !!}"
                class="{{ Request::is('app/missions*') ? 'active-page' : '' }}">
-                <i class="material-icons">settings_input_svideo</i> បេសកកម្ម
+                <i class="material-icons">assignment</i> បេសកកម្ម
             </a>
         </li>
     </ul>
