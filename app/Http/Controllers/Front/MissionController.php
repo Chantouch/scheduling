@@ -34,7 +34,7 @@ class MissionController extends Controller
         $date = Carbon::now();
         $missions = Mission::with('user')
             //->where('start_date', '>=', $date->format('Y-m-d'))
-            ->where('end_date', '<=', $date->format('Y-m-d'))
+            ->where('end_date', '>=', $date->format('Y-m-d'))
             ->orderBy('start_date', 'ASC')
             ->get();
         if ($request->ajax()) {

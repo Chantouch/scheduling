@@ -1,3 +1,14 @@
+@import url(https://fonts.googleapis.com/css?family=Hanuman:400,700&subset=khmer);
+@import url(https://fonts.googleapis.com/css?family=Moul);
+
+body {
+    font-family: 'Hanuman', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Moul', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+}
+
 .card {
     /*height: 95.8 vh;*/
 }
@@ -71,10 +82,11 @@
 @keyframes valid {
     from {
         background-color: #0BA957;
-        color: #1f1f1f;
+        color: #fff;
     }
     to {
         background-color: inherit;
+        color: #000;
     }
 }
 
@@ -131,17 +143,44 @@
 }
 
 .valid {
-    -webkit-animation: valid 1s infinite; /* Safari 4+ */
-    -moz-animation: valid 1s infinite; /* Fx 5+ */
-    -o-animation: valid 1s infinite; /* Opera 12+ */
-    animation: valid 1s infinite; /* IE 10+ */
+    -webkit-animation: valid 2s infinite; /* Safari 4+ */
+    -moz-animation: valid 2s infinite; /* Fx 5+ */
+    -o-animation: valid 2s infinite; /* Opera 12+ */
+    animation: valid 2s infinite; /* IE 10+ */
 }
 
 .finished {
-    background: #838383;
-    color: #ffffff;
+    background: #d9d9d9;
+    /*color: #ffffff;*/
 }
 
 td {
-    padding: 1em;
+    padding: 0.6em;
+    font-size: 25px;
+}
+
+.mn-content, body, html {
+    font-size: 16px !important;
+    height: 100%;
+    width: 100%;
+}
+
+.header-topic {
+    background: #374CF3;
+    color: #fff;
+}
+
+.color-374CF3 {
+    color: #374CF3;
+}
+
+.color-980000 {
+    color: #fff;
+    background: #980000;
+}
+
+.table-header {
+    font-family: 'Moul', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-size: 25px !important;
+    white-space: nowrap;
 }

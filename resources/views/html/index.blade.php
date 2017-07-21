@@ -41,7 +41,7 @@
                         </div>
                     </div>
                 </div>
-                <table class="responsive-table bordered striped" id="mission-data-reload">
+                <table class="bordered" id="mission-data-reload">
                     <thead class="back_color">
                     <tr class="border header-topic">
                         <th class="table-header">កាលបរិច្ឆេទ</th>

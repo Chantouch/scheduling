@@ -34,8 +34,8 @@
             <div class="col s12 m12 l4">
                 <div class="card stats-card">
                     <div class="card-content">
-                        <span class="card-title">Reports</span>
-                        <span class="stats-counter"><span class="counter">23230</span><small>Last week</small></span>
+                        <span class="card-title">របាយការណ៏ប្រជុំ</span>
+                        <span class="stats-counter"><span class="counter">{!! $last_week_meetings !!}</span><small>នៅសប្តាហ៏ មុន</small></span>
                         <div class="percent-info green-text">8% <i class="material-icons">trending_up</i></div>
                     </div>
                     <div class="progress stats-card-progress">
@@ -44,6 +44,50 @@
                 </div>
             </div>
         </div>
+
+        <div class="row no-m-t no-m-b">
+            <div class="col s12 m12 l4">
+                <div class="card stats-card">
+                    <div class="card-content">
+                        <div class="card-options">
+                            <ul>
+                                <li class="red-text"><span class="badge cyan lighten-1">gross</span></li>
+                            </ul>
+                        </div>
+                        <span class="card-title">បេសកកម្ម</span>
+                        <span class="stats-counter">មាន <span class="counter">{!! $this_week_missions !!}</span><small>នៅសប្តាហ៏នេះ</small></span>
+                    </div>
+                    <div id="sparkline-bar"></div>
+                </div>
+            </div>
+            <div class="col s12 m12 l4">
+                <div class="card stats-card">
+                    <div class="card-content">
+                        <div class="card-options">
+                            <ul>
+                                <li><a href="javascript:void(0)"><i class="material-icons">more_vert</i></a></li>
+                            </ul>
+                        </div>
+                        <span class="card-title">បេសកកម្ម</span>
+                        <span class="stats-counter">មាន <span class="counter">{!! $this_month_missions !!}</span><small>នៅក្នុងខែនេះ</small></span>
+                    </div>
+                    <div id="sparkline-line"></div>
+                </div>
+            </div>
+            <div class="col s12 m12 l4">
+                <div class="card stats-card">
+                    <div class="card-content">
+                        <span class="card-title">របាយការណ៏បេសកកម្ម</span>
+                        <span class="stats-counter"><span class="counter">{!! $last_week_missions !!}</span><small>នៅសប្តាហ៏ មុន</small></span>
+                        <div class="percent-info green-text">8% <i class="material-icons">trending_up</i></div>
+                    </div>
+                    <div class="progress stats-card-progress">
+                        <div class="determinate" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row no-m-t no-m-b">
             <div class="col s12 m12 l8">
                 <div class="card visitors-card">

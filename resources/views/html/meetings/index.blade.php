@@ -1,6 +1,7 @@
 @extends('layouts.app')
 @section('style')
     <link rel="stylesheet" href="{!! asset('css/style.css') !!}">
+    <link rel="stylesheet" href="{!! asset('assets/plugins/clock/css/style.css') !!}">
     <style>
 
     </style>
@@ -16,34 +17,39 @@
                 </div>
                 <div class="col s6 m6 l6 center">
                     <div class="main">
-                        <h5>លេខាធិការដ្ឋាន នៃអគ្គនាយកដ្ឋានរតនាគាជាតិ</h5>
+                        <h5 class="color-374CF3">លេខាធិការដ្ឋាន នៃអគ្គនាយកដ្ឋានរតនាគាជាតិ</h5>
                     </div>
                     <div class="takteng">
                         <img src="{!! asset('assets/images/takteng.png') !!}" class="responsive-img" width="180">
                     </div>
                     <div class="mains">
-                        <h5>កម្មវិធីប្រជុំរបស់ឯកឧត្តមបណ្ឌិតអគ្គនាយក</h5>
+                        <h5 class="color-374CF3">កម្មវិធីប្រជុំថ្នាក់ដឹកនាំនិងមន្ត្រី អគ្គ.រតន</h5>
                     </div>
                 </div>
                 <div class="col s3 m3 l3">
                     <div class="dates center">
-                        <h5>
+                        <h5 class="color-374CF3">
                             ថ្ងៃ<span id="day_of_week">loading ...</span>
                             ទី<span id="day">loading ...</span>
                             ខែ<span id="month">loading ...</span>
                             ឆ្នាំ<span id="year">loading ...</span>
                         </h5>
-                        <div id="clock" class="clock">loading ...</div>
+                        {{--<div id="clock" class="clock">loading ...</div>--}}
+                        <div id="clocks" class="light">
+                            <div class="ampm"></div>
+                            <div class="alarm"></div>
+                            <div class="digits"></div>
+                        </div>
                     </div>
                 </div>
-                <table class="bordered" id="meeting-data-reload">
+                <table class="responsive-table bordered striped" id="meeting-data-reload">
                     <thead class="back_color">
-                    <tr class="border">
-                        <th class="size">កាលបរិច្ឆេទ</th>
-                        <th class="size">ម៉ោង</th>
-                        <th class="size">កម្មវត្ថុ</th>
-                        <th class="size">មន្រ្តីអម/អង្គភាពពាក់ព័ន្ធ</th>
-                        <th class="size">ទីកន្លែង</th>
+                    <tr class="border header-topic">
+                        <th data-field="date" class="table-header">កាលបរិច្ឆេទ</th>
+                        <th data-field="time" class="table-header">ម៉ោង</th>
+                        <th data-field="subject" class="table-header">កម្មវត្ថុ</th>
+                        <th data-field="related_org" class="table-header">មន្រ្តីអម/អង្គភាពពាក់ព័ន្ធ</th>
+                        <th data-field="location" class="table-header">ទីកន្លែង</th>
                     </tr>
                     </thead>
                     @include('html.meetings.table')
@@ -66,6 +72,7 @@
 @section('script')
     <script src="{!! asset('js/socket.io.js') !!}"></script>
     <script src="{!! asset('js/meeting.js') !!}"></script>
+    <script src="{!! asset('assets/plugins/clock/js/script.js') !!}"></script>
     <script>
 
         function CountDownTimer(dt, id) {
