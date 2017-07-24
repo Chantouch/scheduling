@@ -8,7 +8,7 @@
             <div class="card-content">
                 <div class="row">
                     <div class="col s6 l6">
-                        <h3 class="card-title">បេសកកម្មរបស់ឯកឧត្តមបណ្ឌិត</h3>
+                        <h3 class="card-title">បេសកកម្មថ្នាក់ដឹកនាំនិងមន្ត្រី អគ្គ.រតន</h3>
                     </div>
                     <div class="col s6 l6">
                         <div class="right m-t-lg">

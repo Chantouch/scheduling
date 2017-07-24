@@ -12,12 +12,10 @@ class Meeting extends Model
 {
     use SoftDeletes;
     protected $appends = ['hashid'];
-    protected $date = ['meeting_date'];
+    protected $dates = ['meeting_date'];
     protected $fillable = [
         'meeting_date', 'start_time', 'end_time', 'subject', 'related_org', 'location', 'user_id', 'ampm'
     ];
-
-    protected $dates = ['date'];
 
     public static function rules()
     {
@@ -40,12 +38,13 @@ class Meeting extends Model
     }
 
     /**
+     * @param $date
      * @return string
      */
-    public function getMeetingDateAttribute()
-    {
-        return $this->attributes['meeting_date'] = Carbon::parse($this->attributes['meeting_date'])->format('d-m-Y');
-    }
+//    public function getMeetingDateAttribute($date)
+//    {
+//        return Carbon::parse($date)->diffForHumans();
+//    }
 
     /**
      * @return string

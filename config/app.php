@@ -231,6 +231,7 @@ return [
         'Hashids' => Vinkla\Hashids\Facades\Hashids::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'Format' => App\Helper\Format::class,
 
     ],
 

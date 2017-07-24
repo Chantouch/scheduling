@@ -1,6 +1,6 @@
 <div class="row">
     <div class="input-field col s6{!! $errors->has('name') ? ' invalid' : '' !!}">
-        {!! Form::text('start_date', null, ['class'=> 'validate datepicker','placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
+        {!! Form::text('start_date', isset($mission) ? $mission->start_date->format('d-m-Y') : null, ['class'=> 'validate datepicker','placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
         <label for="start_date">ថ្ងៃចាប់ផ្តើម</label>
         @if($errors->has('start_date'))
             <label id="start_date-error" class="error" for="start_date">
@@ -10,7 +10,7 @@
     </div>
 
     <div class="input-field col s6">
-        {!! Form::text('end_date', null, ['class' => 'validate datepicker', 'placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
+        {!! Form::text('end_date', isset($mission) ? $mission->end_date->format('d-m-Y') : null, ['class' => 'validate datepicker', 'placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
         <label for="end_date">ថ្ងៃបញ្ចប់</label>
         @if($errors->has('end_date'))
             <label id="end_date-error" class="error" for="end_date">

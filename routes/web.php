@@ -24,7 +24,7 @@ Route::prefix('app')->name('app.')->group(function () {
 });
 
 Route::get('meetings', 'Front\MeetingController@index')->name('front.meetings.index');
-Route::get('missions', 'Front\MissionController@index')->name('front.mission.index');
+Route::get('missions', 'Front\MissionController@index')->name('front.missions.index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

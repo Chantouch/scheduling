@@ -15,17 +15,17 @@
         @foreach($missions as $mission)
             <tr id="{!! $mission->hashid !!}">
                 <td>{!! $i++ !!}</td>
-                <td>{!! $mission->start_date.' - '.$mission->end_date !!}</td>
+                <td>{!! \app\Helper\Format::khmerFormatMissionDate($mission) !!}</td>
                 <td>{!! $mission->leader !!}</td>
                 <td>{!! $mission->mission !!}</td>
                 <td>{!! $mission->offer_to !!}</td>
                 <td class="text-center">
                     {{--{!! Form::open(['route' => ['meetings.destroy', $mission->hashid], 'method' => 'delete', 'class'=>'form-width-70', 'id' => 'action_form']) !!}--}}
                     <div class='btn-group'>
-                        <a href="{!! route('app.missions.show', [$mission->hashid]) !!}"
-                           class='btn btn-floating green tooltipped' data-position="top"
-                           data-delay="50" data-tooltip="ចុច ដើម្បីមើល">
-                            <i class="material-icons">remove_red_eye</i></a>
+                        {{--<a href="{!! route('app.missions.show', [$mission->hashid]) !!}"--}}
+                           {{--class='btn btn-floating green tooltipped' data-position="top"--}}
+                           {{--data-delay="50" data-tooltip="ចុច ដើម្បីមើល">--}}
+                            {{--<i class="material-icons">remove_red_eye</i></a>--}}
                         <a href="{!! route('app.missions.edit', [$mission->hashid]) !!}"
                            class='btn btn-floating tooltipped' data-position="top"
                            data-delay="50" data-tooltip="ចុច ដើម្បីកែប្រែ">

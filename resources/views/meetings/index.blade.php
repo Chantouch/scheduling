@@ -8,7 +8,7 @@
             <div class="card-content">
                 <div class="row">
                     <div class="col s6 l6">
-                        <h3 class="card-title">កម្មវិធីប្រជុំរបស់ឯកឧត្តមរដ្ឋមន្រ្តី</h3>
+                        <h3 class="card-title">កម្មវិធីប្រជុំថ្នាក់ដឹកនាំនិងមន្ត្រី អគ្គ.រតន</h3>
                     </div>
                     <div class="col s6 l6">
                         <div class="right m-t-lg">

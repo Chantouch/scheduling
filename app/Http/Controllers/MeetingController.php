@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Meeting;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -32,8 +33,15 @@ class MeetingController extends Controller
      */
     public function index()
     {
-        $meetings = Meeting::all();
-        return view('meetings.index', compact('meetings'));
+        try {
+            $meetings = Meeting::with('user')
+                ->orderBy('meeting_date', 'ASC')
+                ->orderBy('start_time', 'ASC')
+                ->get();
+            return view('meetings.index', compact('meetings'));
+        } catch (ModelNotFoundException $exception) {
+            return response()->json('Error on getting data');
+        }
     }
 
     /**

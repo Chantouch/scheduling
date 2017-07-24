@@ -1,5 +1,5 @@
 <div class="input-field col s4{!! $errors->has('meeting_date') ? ' invalid' : '' !!}">
-    {!! Form::text('meeting_date', null, ['class'=> 'validate datepicker','placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
+    {!! Form::text('meeting_date', isset($meeting) ? $meeting->meeting_date->format('d-m-Y') : null, ['class'=> 'validate datepicker','placeholder' => 'ថ្ងៃខែឆ្នាំ']) !!}
     <label for="meeting_date">កាលបរិច្ឆេទ</label>
     @if($errors->has('meeting_date'))
         <label id="meeting_date-error" class="error" for="meeting_date">

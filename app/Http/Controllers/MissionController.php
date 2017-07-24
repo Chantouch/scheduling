@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Mission;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -31,7 +32,10 @@ class MissionController extends Controller
      */
     public function index()
     {
-        $missions = Mission::all();
+        $missions = Mission::with('user')
+            ->orderBy('start_date', 'ASC')
+            ->orderBy('end_date', 'ASC')
+            ->get();
         return view('missions.index', compact('missions'));
     }
 

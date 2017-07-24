@@ -2,10 +2,18 @@
 @if(count($missions))
     @foreach($missions as $mission)
         <tr id="{!! $mission->hashid !!}">
-            <td>{!! $mission->start_date.' - '.$mission->end_date !!}</td>
+            <td>
+                {!! \app\Helper\Format::khmerFormatMissionDate($mission) !!}
+            </td>
             <td>{!! $mission->leader !!}</td>
             <td>{!! $mission->mission !!}</td>
-            <td>{!! $mission->offer_to !!}</td>
+            <td>
+                @if(!empty($mission->offer_to))
+                    {!! $mission->offer_to !!}
+                @else
+                    --
+                @endif
+            </td>
         </tr>
     @endforeach
 @else
