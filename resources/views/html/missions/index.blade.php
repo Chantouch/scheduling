@@ -12,16 +12,16 @@
             <div class="card-content">
                 <div class="col s3 m3 l3">
                     <div class="right">
-                        <img src="{!! asset('assets/images/mef.png') !!}" class="responsive-img" width="100">
+                        <img src="{!! asset('assets/images/mef.png') !!}" class="responsive-img" width="125">
                     </div>
                 </div>
                 <div class="col s6 m6 l6 center">
                     <div class="main">
-                        <h5 class="color-374CF3">លេខាធិការដ្ឋាន នៃអគ្គនាយកដ្ឋានរតនាគាជាតិ</h5>
+                        <h5 class="color-374CF3">អគ្គនាយកដ្ឋានរតនាគាជាតិ</h5>
                     </div>
-                    <div class="takteng">
-                        <img src="{!! asset('assets/images/takteng.png') !!}" class="responsive-img" width="180">
-                    </div>
+                    {{--<div class="takteng">--}}
+                    {{--<img src="{!! asset('assets/images/takteng.png') !!}" class="responsive-img" width="180">--}}
+                    {{--</div>--}}
                     <div class="mains">
                         <h5 class="color-374CF3">បេសកកម្មថ្នាក់ដឹកនាំនិងមន្ត្រី អគ្គ.រតន</h5>
                     </div>
@@ -44,7 +44,7 @@
                 <table class="responsive-table bordered striped" id="mission-data-reload">
                     <thead class="back_color">
                     <tr class="border header-topic">
-                        <th class="table-header">កាលបរិច្ឆេទ</th>
+                        <th class="table-header width-13cm">កាលបរិច្ឆេទ</th>
                         <th class="table-header">ថ្នាក់ដឹកនាំ</th>
                         <th class="table-header">បេសកកម្ម</th>
                         <th class="table-header">ផ្ទេរសិទ្ធ</th>

@@ -7,11 +7,11 @@
             {!! 'meeting-now valid' !!}
             @endif
             @if($meeting->end_time < date('H:i') && $meeting->meeting_date == date('d-m-Y')){!! 'finished' !!} @endif">
-            <td>
+            <td class="white-space">
                 {!! \app\Helper\Format::khmerFormatMeetingDate($meeting) !!}
             </td>
             <td data-start-time="{!! $meeting->start_time !!}"
-                data-end-time="{!! $meeting->end_time !!}">
+                data-end-time="{!! $meeting->end_time !!}" class="white-space">
                 {!! $meeting->start_time.' - '.$meeting->end_time !!}
             </td>
             <td>{!! $meeting->subject !!}</td>

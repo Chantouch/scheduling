@@ -2,7 +2,7 @@
 @if(count($missions))
     @foreach($missions as $mission)
         <tr id="{!! $mission->hashid !!}">
-            <td>
+            <td class="white-space">
                 {!! \app\Helper\Format::khmerFormatMissionDate($mission) !!}
             </td>
             <td>{!! $mission->leader !!}</td>

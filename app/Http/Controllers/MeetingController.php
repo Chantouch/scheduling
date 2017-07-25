@@ -35,6 +35,7 @@ class MeetingController extends Controller
     {
         try {
             $meetings = Meeting::with('user')
+                ->orderBy('created_at', 'DESC')
                 ->orderBy('meeting_date', 'ASC')
                 ->orderBy('start_time', 'ASC')
                 ->get();
@@ -86,7 +87,7 @@ class MeetingController extends Controller
                 ]
             ];
             Redis::publish('create-meeting-channel', json_encode($dataRedis));
-            return redirect()->route('app.meetings.index')->with('success', 'ប្រជុំបានបន្ថែមដោយជោគជ័យ។');
+            return redirect()->route('app.meetings.index')->with('message', 'ប្រជុំបានបន្ថែមដោយជោគជ័យ។');
         } catch (ModelNotFoundException $exception) {
             DB::rollBack();
             return response()->json('Can not add new record');

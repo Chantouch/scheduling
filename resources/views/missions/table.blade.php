@@ -7,6 +7,7 @@
             <th class="size">ថ្នាក់ដឹកនាំ</th>
             <th class="size">បេសកកម្ម</th>
             <th class="size">ផ្ទេរសិទ្ធ</th>
+            <th>បានបន្ថែម</th>
             <th>ដំណើរការ</th>
         </tr>
         </thead>
@@ -19,6 +20,7 @@
                 <td>{!! $mission->leader !!}</td>
                 <td>{!! $mission->mission !!}</td>
                 <td>{!! $mission->offer_to !!}</td>
+                <td>{!! $mission->created_at->diffForHumans() !!}</td>
                 <td class="text-center">
                     {{--{!! Form::open(['route' => ['meetings.destroy', $mission->hashid], 'method' => 'delete', 'class'=>'form-width-70', 'id' => 'action_form']) !!}--}}
                     <div class='btn-group'>

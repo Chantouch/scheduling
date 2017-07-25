@@ -12,18 +12,18 @@
             <div class="card-content">
                 <div class="col s3 m3 l3">
                     <div class="right">
-                        <img src="{!! asset('assets/images/mef.png') !!}" class="responsive-img" width="100">
+                        <img src="{!! asset('assets/images/mef.png') !!}" class="responsive-img" width="125">
                     </div>
                 </div>
                 <div class="col s6 m6 l6 center">
                     <div class="main">
-                        <h5 class="color-374CF3">លេខាធិការដ្ឋាន នៃអគ្គនាយកដ្ឋានរតនាគាជាតិ</h5>
+                        <h5 class="color-374CF3 line-height-15">អគ្គនាយកដ្ឋានរតនាគាជាតិ</h5>
                     </div>
-                    <div class="takteng">
-                        <img src="{!! asset('assets/images/takteng.png') !!}" class="responsive-img" width="180">
-                    </div>
+                    {{--<div class="takteng">--}}
+                    {{--<img src="{!! asset('assets/images/takteng.png') !!}" class="responsive-img" width="180">--}}
+                    {{--</div>--}}
                     <div class="mains">
-                        <h5 class="color-374CF3">កម្មវិធីប្រជុំថ្នាក់ដឹកនាំនិងមន្ត្រី អគ្គ.រតន</h5>
+                        <h5 class="color-374CF3 line-height-15">កម្មវិធីប្រជុំថ្នាក់ដឹកនាំនិងមន្ត្រី អគ្គ.រតន</h5>
                     </div>
                 </div>
                 <div class="col s3 m3 l3">

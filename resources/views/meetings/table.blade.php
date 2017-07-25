@@ -20,16 +20,22 @@
                 <td>{!! \app\Helper\Format::khmerFormatMeetingDate($meeting) !!}</td>
                 <td>{!! $meeting->start_time.' - '.$meeting->end_time !!}</td>
                 <td>{!! $meeting->subject !!}</td>
-                <td>{!! $meeting->related_org !!}</td>
+                <td>
+                    @if($meeting->related_org)
+                        {!! $meeting->related_org !!}
+                    @else
+                        --
+                    @endif
+                </td>
                 <td>{!! $meeting->location !!}</td>
                 <td>{!! $meeting->created_at->diffForHumans() !!}</td>
                 <td class="right">
                     {{--{!! Form::open(['route' => ['meetings.destroy', $meeting->hashid], 'method' => 'delete', 'class'=>'form-width-70', 'id' => 'action_form']) !!}--}}
                     <div class='btn-group'>
                         {{--<a href="{!! route('app.meetings.show', [$meeting->hashid]) !!}"--}}
-                           {{--class='btn btn-floating waves-effect waves-light green tooltipped' data-position="top"--}}
-                           {{--data-delay="50" data-tooltip="ចុច ដើម្បីមើល">--}}
-                            {{--<i class="material-icons">remove_red_eye</i></a>--}}
+                        {{--class='btn btn-floating waves-effect waves-light green tooltipped' data-position="top"--}}
+                        {{--data-delay="50" data-tooltip="ចុច ដើម្បីមើល">--}}
+                        {{--<i class="material-icons">remove_red_eye</i></a>--}}
                         <a href="{!! route('app.meetings.edit', [$meeting->hashid]) !!}"
                            class='btn btn-floating waves-effect waves-light tooltipped' data-position="top"
                            data-delay="50" data-tooltip="ចុច ដើម្បីកែប្រែ">

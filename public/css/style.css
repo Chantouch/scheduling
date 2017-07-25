@@ -1,12 +1,17 @@
 @import url(https://fonts.googleapis.com/css?family=Hanuman:400,700&subset=khmer);
 @import url(https://fonts.googleapis.com/css?family=Moul);
 
+@font-face {
+    font-family: 'Kh Kangrey';
+    src: url('../fonts/vendor/Kh-Kangrey.ttf');
+}
+
 body {
-    font-family: 'Hanuman', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-family: 'Kh Kangrey', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Moul', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-family: 'Kh Kangrey', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 }
 
 .card {
@@ -174,13 +179,30 @@ td {
     color: #374CF3;
 }
 
+.line-height-15 {
+    line-height: 1.5;
+}
+
 .color-980000 {
     color: #fff;
     background: #980000;
 }
 
 .table-header {
-    font-family: 'Moul', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
+    font-family: 'Kh Kangrey', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
     font-size: 25px !important;
     white-space: nowrap;
+    border: 1px solid;
+}
+
+.width-13cm {
+    width: 13cm;
+}
+
+.white-space {
+    white-space: nowrap;
+}
+
+h5 {
+    font-size: 2rem;
 }
