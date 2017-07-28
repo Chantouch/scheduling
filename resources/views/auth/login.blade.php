@@ -135,9 +135,11 @@
                                     </div>
 
                                     <div class="col s12 right-align m-t-sm">
-                                        <input type="submit" class="waves-effect waves-light btn teal" value="ចូលប្រព័ន្ធ">
+                                        <button type="submit" class="waves-effect waves-light btn teal"
+                                                value="ចូលប្រព័ន្ធ"> ចូលប្រព័ន្ធ
+                                        </button>
                                         {{--<a href="{!! route('register') !!}" class="waves-effect waves-light btn teal">--}}
-                                            {{--sign up--}}
+                                        {{--sign up--}}
                                         {{--</a>--}}
                                     </div>
 

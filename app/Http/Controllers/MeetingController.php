@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Model\Meeting;
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,10 +10,11 @@ use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Facades\Validator;
 use Vinkla\Hashids\HashidsManager;
 
-class MeetingController extends Controller
+class MeetingController extends BaseController
 {
 
     public $hashid;
+    protected $client;
 
     /**
      * MeetingController constructor.
@@ -22,6 +22,7 @@ class MeetingController extends Controller
      */
     public function __construct(HashidsManager $hashid)
     {
+        parent::__construct();
         $this->middleware('auth');
         $this->hashid = $hashid;
     }

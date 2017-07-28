@@ -57,6 +57,11 @@
                class="{{ Request::is('app/missions*') ? 'active-page' : '' }}">
                 <i class="material-icons">assignment</i> បេសកកម្ម
             </a>
+
+            <a href="{!! route('app.gcalendars.index') !!}"
+               class="{{ Request::is('app/gcalendars*') ? 'active-page' : '' }}">
+                <i class="material-icons">assignment</i> Google Calendar
+            </a>
         </li>
     </ul>
     <div class="footer">
