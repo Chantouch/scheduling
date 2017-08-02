@@ -56,6 +56,8 @@ class SyncMeetingData extends Command
             $meetings = Meeting::with('user')->pluck('created')->toArray();
             $temp_data = JsonData::with('owner')
                 ->where('summary', 'like', '%' . $query . '%')
+                ->orWhere('summary', 'like', '%' . 'Meeting' . '%')
+                ->orWhere('summary', 'like', '%' . 'Meetings' . '%')
                 ->get();
             $inserts = [];
             $updated = false;

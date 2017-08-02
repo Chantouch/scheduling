@@ -30,11 +30,14 @@ class TempDataController extends BaseController
         try {
             $service = new Google_Service_Calendar($this->client);
             $calendarId = 'dg.gdnt@gmail.com';
+            $minDate = date('Y-m-d', strtotime('-1 days')) . "T00:00:00-04:00";
+            $maxDate = date('Y-m-d', strtotime('+90 days')) . "T00:00:00-04:00";
             $optParams = array(
                 //'maxResults' => 50,
                 'orderBy' => 'startTime',
                 'singleEvents' => TRUE,
-                //'timeMin' => date('c'),
+                'timeMin' => $minDate,
+                'timeMax' => $maxDate
             );
             $results = $service->events->listEvents($calendarId, $optParams);
             $calendars = $results->getItems();
@@ -91,11 +94,14 @@ class TempDataController extends BaseController
         try {
             $service = new Google_Service_Calendar($this->client);
             $calendarId = 'dg.gdnt@gmail.com';
+            $minDate = date('Y-m-d', strtotime('-1 days')) . "T00:00:00-04:00";
+            $maxDate = date('Y-m-d', strtotime('+90 days')) . "T00:00:00-04:00";
             $optParams = array(
                 //'maxResults' => 50,
                 'orderBy' => 'startTime',
                 'singleEvents' => TRUE,
-                //'timeMin' => date('c'),
+                'timeMin' => $minDate,
+                'timeMax' => $maxDate
             );
             $results = $service->events->listEvents($calendarId, $optParams);
             $calendars = $results->getItems();
@@ -156,6 +162,8 @@ class TempDataController extends BaseController
             $meetings = Meeting::with('user')->pluck('created')->toArray();
             $temp_data = JsonData::with('owner')
                 ->where('summary', 'like', '%' . $query . '%')
+                ->orWhere('summary', 'like', '%' . 'Meeting' . '%')
+                ->orWhere('summary', 'like', '%' . 'Meetings' . '%')
                 ->get();
             $inserts = [];
             foreach ($temp_data as $calendar) {
@@ -271,9 +279,14 @@ class TempDataController extends BaseController
         try {
             $service = new Google_Service_Calendar($this->client);
             $calendarId = 'dg.gdnt@gmail.com';
+            $minDate = date('Y-m-d', strtotime('-1 days')) . "T00:00:00-04:00";
+            $maxDate = date('Y-m-d', strtotime('+90 days')) . "T00:00:00-04:00";
             $optParams = array(
+                //'maxResults' => 50,
                 'orderBy' => 'startTime',
                 'singleEvents' => TRUE,
+                'timeMin' => $minDate,
+                'timeMax' => $maxDate
             );
             $results = $service->events->listEvents($calendarId, $optParams);
             $calendars = $results->getItems();

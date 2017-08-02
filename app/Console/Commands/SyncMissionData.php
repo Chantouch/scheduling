@@ -56,6 +56,8 @@ class SyncMissionData extends Command
             $meetings = Mission::with('user')->pluck('created')->toArray();
             $temp_data = JsonData::with('owner')
                 ->where('summary', 'like', '%' . $query . '%')
+                ->orWhere('summary', 'like', '%' . 'Mission' . '%')
+                ->orWhere('summary', 'like', '%' . 'Missions' . '%')
                 ->get();
             $inserts = [];
             $updated = false;

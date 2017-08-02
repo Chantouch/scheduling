@@ -53,9 +53,14 @@ class SyncGoogleCalendar extends Command
         try {
             $service = new Google_Service_Calendar($this->client);
             $calendarId = 'dg.gdnt@gmail.com';
+            $minDate = date('Y-m-d', strtotime('-14400 days')) . "T00:00:00-04:00";
+            $maxDate = date('Y-m-d', strtotime('+720 days')) . "T00:00:00-04:00";
             $optParams = array(
+                //'maxResults' => 50,
                 'orderBy' => 'startTime',
                 'singleEvents' => TRUE,
+                'timeMin' => $minDate,
+                'timeMax' => $maxDate
             );
             $results = $service->events->listEvents($calendarId, $optParams);
             $calendars = $results->getItems();
