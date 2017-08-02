@@ -39,8 +39,8 @@ class gCalendarController extends BaseController
             );
             $results = $service->events->listEvents($calendarId, $optParams);
             $calendars = $results->getItems();
-            return $calendars;
-            //return view('app.calendar.index', compact('calendars'));
+            //return $calendars;
+            return view('app.calendar.index', compact('calendars'));
 
         } catch (Google_Service_Exception $exception) {
             return response()->json(['Error' => 'មានបញ្ហាបច្ចេកទេស ក្នុងការទាញយកទិន្នន័យពី Google Calendar']);

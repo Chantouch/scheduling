@@ -14,7 +14,7 @@ class Meeting extends Model
     protected $appends = ['hashid'];
     protected $dates = ['meeting_date'];
     protected $fillable = [
-        'meeting_date', 'start_time', 'end_time', 'subject', 'related_org', 'location', 'user_id', 'ampm'
+        'meeting_date', 'start_time', 'end_time', 'subject', 'related_org', 'location', 'user_id', 'ampm', 'created', 'updated'
     ];
 
     public static function rules()

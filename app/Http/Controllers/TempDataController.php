@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\JsonData;
 use App\Model\Meeting;
+use App\Model\Mission;
 use App\Model\TempData;
 use Carbon\Carbon;
 use Google_Service_Calendar;
@@ -151,10 +153,57 @@ class TempDataController extends BaseController
     {
         try {
             $query = 'ប្រជុំ';
-            $local_temp_data = TempData::with('user')
-                ->where('data', 'like', '%' . $query . '%')
-                ->paginate(50);
-            return $local_temp_data;
+            $meetings = Meeting::with('user')->pluck('created')->toArray();
+            $temp_data = JsonData::with('owner')
+                ->where('summary', 'like', '%' . $query . '%')
+                ->get();
+            $inserts = [];
+            foreach ($temp_data as $calendar) {
+                $replace_start = trim(str_replace(['T', '+07:00'], ' ', $calendar->start));
+                //dd(substr($replace_start, 0, -9));
+                $replace_end = trim(str_replace(['T', '+07:00'], ' ', $calendar->end));
+                if (in_array($created = $calendar['created'], $meetings)) {
+                    $data_temp = Meeting::with('user')->where('created', $created)->first();
+                    if (is_null($data_temp)) {
+                        continue;
+                    }
+                    $update_array = [
+                        'user_id' => 1,
+                        'location' => $calendar->location,
+                        'subject' => $calendar->summary,
+                        'updated' => $calendar->updated,
+                        'meeting_date' => substr($replace_start, 0, -9),
+                        'start_time' => substr($replace_start, -8),
+                        'end_time' => substr($replace_end, -8),
+                        //'htmlLink' => $calendar->htmlLink,
+                        'updated_at' => Carbon::now(),
+                        'created' => $calendar->created,
+                    ];
+                    $data_temp->update($update_array);
+                    continue;
+                }
+                $inserts[] = [
+                    'user_id' => 1,
+                    'location' => $calendar->location,
+                    'subject' => $calendar->summary,
+                    'updated' => $calendar->updated,
+                    'meeting_date' => substr($replace_start, 0, -9),
+                    'start_time' => substr($replace_start, -8),
+                    'end_time' => substr($replace_end, -8),
+                    //'htmlLink' => $calendar->htmlLink,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                    'created' => $calendar->created,
+                ];
+                $temp_data[] = $calendar['created'];
+            }
+            if (!empty($inserts)) {
+                $insert_success = Meeting::with('user')->insert($inserts);
+                if (!$insert_success) {
+                    return response()->json(['status' => 'Unable to process your request right now, Please contact to System admin @070375783']);
+                }
+            }
+            return response()->json(['status' => 'Success Data inserted/updated successfully.']);
         } catch (ModelNotFoundException $exception) {
             return response()->json(['Status' => 'Can not retrieve data from local']);
         }
@@ -164,12 +213,128 @@ class TempDataController extends BaseController
     {
         try {
             $query = 'បេសកកម្ម';
-            $local_temp_data = TempData::with('user')
-                ->where('data', 'like', '%' . $query . '%')
-                ->paginate(50);
-            return $local_temp_data;
+            $meetings = Mission::with('user')->pluck('created')->toArray();
+            $temp_data = JsonData::with('owner')
+                ->where('summary', 'like', '%' . $query . '%')
+                ->get();
+            $inserts = [];
+            foreach ($temp_data as $calendar) {
+                $replace_start = trim(str_replace(['T', '+07:00'], ' ', $calendar->start));
+                $replace_end = trim(str_replace(['T', '+07:00'], ' ', $calendar->end));
+                if (in_array($created = $calendar['created'], $meetings)) {
+                    $data_temp = Mission::with('user')->where('created', $created)->first();
+                    if (is_null($data_temp)) {
+                        continue;
+                    }
+                    $update_array = [
+                        'user_id' => 1,
+                        'location' => $calendar->location,
+                        'mission' => $calendar->summary,
+                        'updated' => $calendar->updated,
+                        'start_date' => substr($replace_start, 0, -6),
+                        'end_date' => substr($replace_end, 0, -6),
+                        //'htmlLink' => $calendar->htmlLink,
+                        'updated_at' => Carbon::now(),
+                        'created' => $calendar->created,
+                    ];
+                    $data_temp->update($update_array);
+                    continue;
+                }
+                $inserts[] = [
+                    'user_id' => 1,
+                    'location' => $calendar->location,
+                    'mission' => $calendar->summary,
+                    'updated' => $calendar->updated,
+                    'start_date' => substr($replace_start, 0, -6),
+                    'end_date' => substr($replace_end, 0, -6),
+                    //'htmlLink' => $calendar->htmlLink,
+                    'updated_at' => Carbon::now(),
+                    'created_at' => Carbon::now(),
+                    'created' => $calendar->created,
+                ];
+                $temp_data[] = $calendar['created'];
+            }
+            if (!empty($inserts)) {
+                $insert_success = Mission::with('user')->insert($inserts);
+                if (!$insert_success) {
+                    return response()->json(['status' => 'Unable to process your request right now, Please contact to System admin @070375783']);
+                }
+            }
+            return response()->json(['status' => 'Success Data inserted/updated successfully.']);
         } catch (ModelNotFoundException $exception) {
             return response()->json(['Status' => 'Can not retrieve data from local']);
+        }
+    }
+
+    public function testSync()
+    {
+        try {
+            $service = new Google_Service_Calendar($this->client);
+            $calendarId = 'dg.gdnt@gmail.com';
+            $optParams = array(
+                'orderBy' => 'startTime',
+                'singleEvents' => TRUE,
+            );
+            $results = $service->events->listEvents($calendarId, $optParams);
+            $calendars = $results->getItems();
+            $temp_data = JsonData::with('owner')->pluck('created')->toArray();
+            $updated = false;
+            $inserts = [];
+            foreach ($calendars as $calendar) {
+                if (in_array($summary = $calendar['created'], $temp_data)) {
+                    $data_temp = JsonData::with('owner')->where('created', $summary)->first();
+                    if (is_null($data_temp)) {
+                        continue;
+                    }
+
+                    $insert = [
+                        'data_json' => json_encode($calendar),
+                        'user_id' => 1,
+                        'iCalUID' => $calendar->iCalUID,
+                        'location' => $calendar->location,
+                        'status' => $calendar->status,
+                        'summary' => $calendar->summary,
+                        'updated' => $calendar->updated,
+                        'creator' => json_encode($calendar->creator),
+                        'organizer' => json_encode($calendar->organizer),
+                        'start' => $calendar->start['dateTime'] !== null ? $calendar->start['dateTime'] : $calendar->start['date'] . 'T' . Carbon::now()->format('H:i:s') . '+07:00',
+                        'end' => $calendar->end['dateTime'] !== null ? $calendar->end['dateTime'] : $calendar->end['date'] . 'T' . Carbon::now()->addHour(2)->format('H:i:s') . '+07:00',
+                        'created' => $calendar['created'],
+                        'updated_at' => Carbon::now(),
+                        'htmlLink' => json_encode($calendar->htmlLink),
+                    ];
+                    //echo $calendar->summary.'<br><br>';
+                    $data_temp->update($insert);
+                    continue;
+                }
+                $inserts[] = [
+                    'data_json' => json_encode($calendar),
+                    'user_id' => 1,
+                    'iCalUID' => $calendar->iCalUID,
+                    'location' => $calendar->location,
+                    'status' => $calendar->status,
+                    'summary' => $calendar->summary,
+                    'updated' => $calendar->updated,
+                    'creator' => json_encode($calendar->creator),
+                    'organizer' => json_encode($calendar->organizer),
+                    'start' => $calendar->start['dateTime'] !== null ? $calendar->start['dateTime'] : $calendar->start['date'] . 'T' . Carbon::now()->format('H:i:s') . '+07:00',
+                    'end' => $calendar->end['dateTime'] !== null ? $calendar->end['dateTime'] : $calendar->end['date'] . 'T' . Carbon::now()->addHour(2)->format('H:i:s') . '+07:00',
+                    'created' => $calendar['created'],
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now(),
+                    'htmlLink' => json_encode($calendar->htmlLink),
+                ];
+                $temp_data[] = $calendar['created'];
+            }
+            if (!empty($inserts)) {
+                $insert_success = JsonData::with('owner')->insert($inserts);
+                if (!$insert_success) {
+                    return response()->json(['status' => 'Unable to process your request right now, Please contact to System admin @070375783']);
+                }
+            }
+            return response()->json(['status' => 'Success Data inserted/updated successfully.']);
+        } catch (Google_Service_Exception $exception) {
+            return response()->json(['status' => 'Error Data inserted/updated successfully.']);
         }
     }
 }

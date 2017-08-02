@@ -24,9 +24,11 @@ Route::prefix('app')->name('app.')->group(function () {
     Route::resource('gcalendars', 'gCalendarController');
     Route::get('gscalendars', 'gCalendarController@getDataG');
     Route::get('sync-google-calendars', 'TempDataController@syncGoogleCalendars')->name('sync.google.calendars');
+    Route::get('sync-google-test-sync', 'TempDataController@testSync')->name('sync.google.test-sync');
     Route::get('sync-google-calendars-meetings', 'TempDataController@syncMeetingLocalData')->name('sync.google-calendars.local-meeting');
     Route::get('sync-google-calendars-missions', 'TempDataController@syncMissionLocalData')->name('sync.google-calendars.local-mission');
     Route::get('sync-google-calendars-local', 'TempDataController@syncGoogleCalendarsToLocal')->name('sync.google-calendars.local');
+    Route::get('json-data/{id}', 'JsonDataController@show')->name('sync.json.data');
 });
 
 Route::get('meetings', 'Front\MeetingController@index')->name('front.meetings.index');

@@ -3,27 +3,28 @@
 namespace App\Console\Commands;
 
 use App\Model\JsonData;
+use App\Model\Meeting;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Google_Client;
 use Google_Service_Calendar;
 use Google_Service_Exception;
 
-class SyncGoogleCalendar extends Command
+class SyncMeetingData extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'google:sync';
+    protected $signature = 'sync:meetings';
     protected $client;
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Synchronize all data from google calendars that including new and old.';
+    protected $description = 'To run sync local data of meeting form json temporary.';
 
     /**
      * Create a new command instance.
@@ -51,63 +52,54 @@ class SyncGoogleCalendar extends Command
     public function handle()
     {
         try {
-            $service = new Google_Service_Calendar($this->client);
-            $calendarId = 'dg.gdnt@gmail.com';
-            $optParams = array(
-                'orderBy' => 'startTime',
-                'singleEvents' => TRUE,
-            );
-            $results = $service->events->listEvents($calendarId, $optParams);
-            $calendars = $results->getItems();
-            $temp_data = JsonData::with('owner')->pluck('created')->toArray();
-            $updated = false;
+            $query = 'ប្រជុំ';
+            $meetings = Meeting::with('user')->pluck('created')->toArray();
+            $temp_data = JsonData::with('owner')
+                ->where('summary', 'like', '%' . $query . '%')
+                ->get();
             $inserts = [];
-            foreach ($calendars as $calendar) {
-                if (in_array($summary = $calendar['created'], $temp_data)) {
-                    $data_temp = JsonData::with('owner')->where('created', $summary)->first();
+            $updated = false;
+            foreach ($temp_data as $calendar) {
+                $replace_start = trim(str_replace(['T', '+07:00'], ' ', $calendar->start));
+                //dd(substr($replace_start, 0, -9));
+                $replace_end = trim(str_replace(['T', '+07:00'], ' ', $calendar->end));
+                if (in_array($created = $calendar['created'], $meetings)) {
+                    $data_temp = Meeting::with('user')->where('created', $created)->first();
                     if (is_null($data_temp)) {
                         continue;
                     }
-                    $insert = [
+                    $update_array = [
                         'user_id' => 1,
-                        'data_json' => json_encode($calendar),
-                        'iCalUID' => $calendar->iCalUID,
                         'location' => $calendar->location,
-                        'status' => $calendar->status,
-                        'summary' => $calendar->summary,
+                        'subject' => $calendar->summary,
                         'updated' => $calendar->updated,
-                        'creator' => json_encode($calendar->creator),
-                        'organizer' => json_encode($calendar->organizer),
-                        'start' => $calendar->start['dateTime'] !== null ? $calendar->start['dateTime'] : $calendar->start['date'] . 'T10:00:00+07:00',
-                        'end' => $calendar->end['dateTime'] !== null ? $calendar->end['dateTime'] : $calendar->end['date'] . 'T20:00:00+07:00',
-                        'created' => $calendar['created'],
+                        'meeting_date' => substr($replace_start, 0, -9),
+                        'start_time' => substr($replace_start, -8),
+                        'end_time' => substr($replace_end, -8),
+                        //'htmlLink' => $calendar->htmlLink,
                         'updated_at' => Carbon::now(),
-                        'htmlLink' => json_encode($calendar->htmlLink),
+                        'created' => $calendar->created,
                     ];
-                    $data_temp->update($insert);
+                    $data_temp->update($update_array);
                     continue;
                 }
                 $inserts[] = [
                     'user_id' => 1,
-                    'data_json' => json_encode($calendar),
-                    'iCalUID' => $calendar->iCalUID,
                     'location' => $calendar->location,
-                    'status' => $calendar->status,
-                    'summary' => $calendar->summary,
+                    'subject' => $calendar->summary,
                     'updated' => $calendar->updated,
-                    'creator' => json_encode($calendar->creator),
-                    'organizer' => json_encode($calendar->organizer),
-                    'start' => $calendar->start['dateTime'] !== null ? $calendar->start['dateTime'] : $calendar->start['date'] . 'T10:00:00+07:00',
-                    'end' => $calendar->end['dateTime'] !== null ? $calendar->end['dateTime'] : $calendar->end['date'] . 'T20:00:00+07:00',
-                    'created' => $calendar['created'],
+                    'meeting_date' => substr($replace_start, 0, -9),
+                    'start_time' => substr($replace_start, -8),
+                    'end_time' => substr($replace_end, -8),
+                    //'htmlLink' => $calendar->htmlLink,
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now(),
-                    'htmlLink' => json_encode($calendar->htmlLink),
+                    'created' => $calendar->created,
                 ];
                 $temp_data[] = $calendar['created'];
             }
             if (!empty($inserts)) {
-                $insert_success = JsonData::with('owner')->insert($inserts);
+                $insert_success = Meeting::with('user')->insert($inserts);
                 if (!$insert_success) {
                     $this->info('Unable to process your request right now, Please contact to System admin @070375783');
                 }
@@ -118,6 +110,7 @@ class SyncGoogleCalendar extends Command
             } else {
                 $this->info('Google:Sync Command Run added/updated with exist!');
             }
+
         } catch (Google_Service_Exception $exception) {
             $this->info('Google:Sync Command Run unsuccessfully!');
         }

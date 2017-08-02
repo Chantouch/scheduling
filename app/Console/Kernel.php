@@ -3,6 +3,8 @@
 namespace App\Console;
 
 use App\Console\Commands\SyncGoogleCalendar;
+use App\Console\Commands\SyncMeetingData;
+use App\Console\Commands\SyncMissionData;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -14,7 +16,9 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        SyncGoogleCalendar::class
+        SyncGoogleCalendar::class,
+        SyncMeetingData::class,
+        SyncMissionData::class,
     ];
 
     /**
@@ -26,6 +30,10 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('google:sync')
+            ->everyMinute();
+        $schedule->command('sync:meetings')
+            ->everyMinute();
+        $schedule->command('sync:missions')
             ->everyMinute();
     }
 

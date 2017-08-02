@@ -13,7 +13,7 @@ class Mission extends Model
     use SoftDeletes;
     protected $appends = ['hashid'];
     protected $fillable = [
-        'start_date', 'end_date', 'leader', 'mission', 'offer_to', 'user_id'
+        'start_date', 'end_date', 'leader', 'mission', 'offer_to', 'user_id', 'created', 'updated', 'location'
     ];
     protected $dates = ['end_date', 'start_date'];
 
@@ -32,21 +32,21 @@ class Mission extends Model
         ];
     }
 
-//    /**
-//     * @return string
-//     */
-//    public function getEndDateAttribute()
-//    {
-//        return $this->attributes['end_date'] = Carbon::parse($this->attributes['end_date'])->format('d-m-Y');
-//    }
-//
-//    /**
-//     * @return string
-//     */
-//    public function getStartDateAttribute()
-//    {
-//        return $this->attributes['start_date'] = Carbon::parse($this->attributes['start_date'])->format('d-m-Y');
-//    }
+    /**
+     * @return string
+     */
+    public function getEndDateAttribute()
+    {
+        return $this->attributes['end_date'] = Carbon::parse($this->attributes['end_date']);
+    }
+
+    /**
+     * @return string
+     */
+    public function getStartDateAttribute()
+    {
+        return $this->attributes['start_date'] = Carbon::parse($this->attributes['start_date']);
+    }
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo

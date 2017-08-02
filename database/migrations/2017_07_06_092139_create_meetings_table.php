@@ -19,11 +19,13 @@ class CreateMeetingsTable extends Migration
             $table->time('start_time')->nullable();
             $table->time('end_time')->nullable();
             $table->string('ampm')->nullable();
-            $table->string('subject')->nullable();
+            $table->longText('subject')->nullable();
             $table->string('related_org')->nullable();
             $table->longText('location')->nullable();
             $table->integer('user_id', false, true)->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade')->onDelete('cascade');
+            $table->string('created')->nullable();
+            $table->string('updated')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });
